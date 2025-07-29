@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Livewire\Dashboard\Dashboard;
 use App\Livewire\Roles\Index as RolesIndex;
+use App\Livewire\Permisos\Index as PermisosIndex;
 
 Route::get('/', function () {
     return redirect()->route('home');
@@ -15,3 +16,5 @@ Route::post('/loginv', [AuthController::class, 'loginUser'])->name('loginUser');
 
 Route::get('/inicio', Dashboard::class)->name('inicio');
 Route::get('/roles', RolesIndex::class)->name('seguridad.roles.index');
+Route::get('/permisos', PermisosIndex::class)->name('seguridad.permisos.index');
+

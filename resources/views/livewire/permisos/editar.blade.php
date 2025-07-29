@@ -7,10 +7,10 @@
          <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-800 w-2/5">
              <!-- Modal body -->
              <div class="mb-6 p-5">
-                    <h3 class="text-lg font-bold mb-6 text-md text-gray-900 dark:text-white">Ediar Pol</h3>
+                    <h3 class="text-lg font-bold mb-6 text-md text-gray-900 dark:text-white">Ediar Permiso</h3>
 
                  <label for="first_name" class="block mb-2 text-md font-medium text-gray-900 dark:text-white">
-                     Nombre del rol</label>
+                     Nombre del permiso</label>
                  <input type="text" id="first_name" wire:model="name"
                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                      placeholder="" required />
