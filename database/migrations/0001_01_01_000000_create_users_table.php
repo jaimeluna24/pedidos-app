@@ -13,11 +13,18 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('dni')->unique();
+            $table->string('nombre');
+            $table->string('apellido');
+            $table->string('telefono')->unique();
+            $table->string('email')->nullable();
+            $table->string('nombre_usuario')->unique();
             $table->string('password');
+            $table->foreignId('departamento_id')
+                ->constrained('departamentos');
+            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
 
@@ -34,6 +41,17 @@ return new class extends Migration
             $table->text('user_agent')->nullable();
             $table->longText('payload');
             $table->integer('last_activity')->index();
+        });
+
+        Schema::create('bitacoras', function (Blueprint $table) {
+            $table->id();
+            $table->string('accion');
+            $table->string('modelo');
+            $table->string('modelo_id');
+            $table->text('detalle');
+            $table->foreignId('usuario_id')
+                ->constrained('users');
+            $table->timestamp('created_at');
         });
     }
 
