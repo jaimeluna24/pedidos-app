@@ -134,24 +134,7 @@
                             <span class="ms-3">Dashboard</span>
                         </a>
                     </li>
-                    <li>
-                        <a
-                        {{-- href="{{ route('mis-solicitudes.index') }}" --}}
-                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-700 group
-                            {{-- {{ request()->routeIs('mis-solicitudes.*') ? 'bg-blue-500 text-white hover:bg-blue-600 dark:hover:bg-blue-600' : '' }} --}}
-                             ">
-                            <svg class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white
-                            {{-- {{ request()->routeIs('mis-solicitudes.*') ? 'text-white dark:text-white hover:text-gray-200' : '' }} --}}
-                             "
-                                xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                viewBox="0 0 24 24">
-                                <path fill="currentColor" fill-rule="evenodd"
-                                    d="M9 7V2.2a2 2 0 0 0-.5.4l-4 3.9a2 2 0 0 0-.3.5zm2 0V2h7a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9h5a2 2 0 0 0 2-2m2-2a1 1 0 1 0 0 2h3a1 1 0 1 0 0-2zm0 3a1 1 0 1 0 0 2h3a1 1 0 1 0 0-2zm-6 4c0-.6.4-1 1-1h8c.6 0 1 .4 1 1v6c0 .6-.4 1-1 1H8a1 1 0 0 1-1-1zm8 1v1h-2v-1zm0 3h-2v1h2zm-4-3v1H9v-1zm0 3H9v1h2z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                            <span class="flex-1 ms-3 whitespace-nowrap">Solicitudes</span>
-                        </a>
-                    </li>
+
 
                  <li>
                     <button type="button"
@@ -167,7 +150,7 @@
                             <path fill="currentColor"
                                 d="M13.981 2H6.018s-.996 0-.996 1h9.955c0-1-.996-1-.996-1m2.987 3c0-1-.995-1-.995-1H4.027s-.995 0-.995 1v1h13.936zm1.99 1l-.588-.592V7H1.63V5.408L1.041 6C.452 6.592.03 6.75.267 8c.236 1.246 1.379 8.076 1.549 9c.186 1.014 1.217 1 1.217 1h13.936s1.03.014 1.217-1c.17-.924 1.312-7.754 1.549-9c.235-1.25-.187-1.408-.777-2M14 11.997c0 .554-.449 1.003-1.003 1.003H7.003A1.003 1.003 0 0 1 6 11.997V10h1v2h6v-2h1z" />
                         </svg>
-                        <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Trámites</span>
+                        <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Pedidos</span>
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 10 6">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -198,43 +181,43 @@
                         </li>
                     </ul>
                 </li>
-                 <li>
-                    <button type="button"
-                        class="hover:text-gray-800 flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700
-                        {{ request()->routeIs('seguridad.*') ? 'bg-blue-500 text-white hover:bg-blue-600 dark:hover:bg-blue-600' : '' }}
+                  <li>
+                        <a
+                        {{-- href="{{ route('mis-solicitudes.index') }}" --}}
+                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-700 group
+                            {{-- {{ request()->routeIs('mis-solicitudes.*') ? 'bg-blue-500 text-white hover:bg-blue-600 dark:hover:bg-blue-600' : '' }} --}}
+                             ">
+                            <svg class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white
+                            {{-- {{ request()->routeIs('mis-solicitudes.*') ? 'text-white dark:text-white hover:text-gray-200' : '' }} --}}
+                             "
+                                xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                viewBox="0 0 24 24">
+                                <path fill="currentColor" fill-rule="evenodd"
+                                    d="M9 7V2.2a2 2 0 0 0-.5.4l-4 3.9a2 2 0 0 0-.3.5zm2 0V2h7a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9h5a2 2 0 0 0 2-2m2-2a1 1 0 1 0 0 2h3a1 1 0 1 0 0-2zm0 3a1 1 0 1 0 0 2h3a1 1 0 1 0 0-2zm-6 4c0-.6.4-1 1-1h8c.6 0 1 .4 1 1v6c0 .6-.4 1-1 1H8a1 1 0 0 1-1-1zm8 1v1h-2v-1zm0 3h-2v1h2zm-4-3v1H9v-1zm0 3H9v1h2z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <span class="flex-1 ms-3 whitespace-nowrap">Productos</span>
+                        </a>
+                    </li>
+                    <li>
+                    <a
+                    {{-- href="{{ route('roles.index') }}" --}}
+                        class="hover:text-gray-800 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group
+                        {{-- {{ request()->routeIs('roles.*') ? 'bg-blue-500 text-white hover:bg-blue-600 dark:hover:bg-blue-600' : '' }} --}}
+                         ">
+                        <svg class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white
+                        {{-- {{ request()->routeIs('roles.*') ? 'text-white dark:text-white hover:text-gray-200' : '' }} --}}
                          "
-                        aria-controls="dropdown-example-seguridad" data-collapse-toggle="dropdown-example-seguridad">
-
-
-                        <svg class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white
-                        {{ request()->routeIs('seguridad.*') ? 'text-white dark:text-white hover:text-gray-200' : '' }}
-                         "
-                        xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#ffffff" d="M12 12h7c-.53 4.11-3.28 7.78-7 8.92zH5V6.3l7-3.11M12 1L3 5v6c0 5.55 3.84 10.73 9 12c5.16-1.27 9-6.45 9-12V5z"/></svg>
-                        <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Seguridad</span>
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="m1 1 4 4 4-4" />
+                            xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="M15 21h-2a2 2 0 0 1 0-4h2v-2h-2a4 4 0 0 0 0 8h2Zm8-2a4 4 0 0 1-4 4h-2v-2h2a2 2 0 0 0 0-4h-2v-2h2a4 4 0 0 1 4 4" />
+                            <path fill="currentColor"
+                                d="M14 18h4v2h-4zm-7 1a6 6 0 0 1 .09-1H3v-1.4c0-2 4-3.1 6-3.1a8.6 8.6 0 0 1 1.35.125A5.95 5.95 0 0 1 13 13h5V4a2.006 2.006 0 0 0-2-2h-4.18a2.988 2.988 0 0 0-5.64 0H2a2.006 2.006 0 0 0-2 2v14a2.006 2.006 0 0 0 2 2h5.09A6 6 0 0 1 7 19M9 2a1 1 0 1 1-1 1a1.003 1.003 0 0 1 1-1m0 4a3 3 0 1 1-3 3a2.996 2.996 0 0 1 3-3" />
                         </svg>
-                    </button>
-                    <ul id="dropdown-example-seguridad" class="hidden py-2 space-y-2">
-                        <li>
-                            <a
-                            href="{{ route('seguridad.roles.index') }}"
-                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700
-                                {{ request()->routeIs('seguridad.roles.index') ? 'bg-blue-400 text-white hover:bg-blue-500 dark:hover:bg-blue-500' : '' }}
-                                 ">Roles</a>
-                        </li>
-                        <li>
-                            <a
-                            href="{{ route('seguridad.permisos.index') }}"
-                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700
-                                {{ request()->routeIs('seguridad.permisos.index') ? 'bg-blue-400 text-white hover:bg-blue-500 dark:hover:bg-blue-500' : '' }}
-                                 ">Permisos</a>
-                        </li>
-
-                    </ul>
+                        <span class="flex-1 ms-3 whitespace-nowrap">Inventarios</span>
+                    </a>
                 </li>
+
                 <li>
                     <a
                     {{-- href="{{ route('certificaciones.index') }}" --}}
@@ -248,7 +231,7 @@
                             <path fill="currentColor"
                                 d="M21 1v22H3V1zm-4 12H7v2h10zm-2 4H7v2h8zM11 3H7v5.5l2-1.65l2 1.65z" />
                         </svg>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Certificaciones</span>
+                        <span class="flex-1 ms-3 whitespace-nowrap">Proveedores</span>
                     </a>
                 </li>
                 <li>
@@ -285,23 +268,38 @@
                         <span class="flex-1 ms-3 whitespace-nowrap">Usuarios</span>
                     </a>
                 </li>
-                <li>
-                    <a
-                    {{-- href="{{ route('roles.index') }}" --}}
-                        class="hover:text-gray-800 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group
-                        {{-- {{ request()->routeIs('roles.*') ? 'bg-blue-500 text-white hover:bg-blue-600 dark:hover:bg-blue-600' : '' }} --}}
-                         ">
-                        <svg class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white
-                        {{-- {{ request()->routeIs('roles.*') ? 'text-white dark:text-white hover:text-gray-200' : '' }} --}}
-                         "
-                            xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-                            <path fill="currentColor"
-                                d="M15 21h-2a2 2 0 0 1 0-4h2v-2h-2a4 4 0 0 0 0 8h2Zm8-2a4 4 0 0 1-4 4h-2v-2h2a2 2 0 0 0 0-4h-2v-2h2a4 4 0 0 1 4 4" />
-                            <path fill="currentColor"
-                                d="M14 18h4v2h-4zm-7 1a6 6 0 0 1 .09-1H3v-1.4c0-2 4-3.1 6-3.1a8.6 8.6 0 0 1 1.35.125A5.95 5.95 0 0 1 13 13h5V4a2.006 2.006 0 0 0-2-2h-4.18a2.988 2.988 0 0 0-5.64 0H2a2.006 2.006 0 0 0-2 2v14a2.006 2.006 0 0 0 2 2h5.09A6 6 0 0 1 7 19M9 2a1 1 0 1 1-1 1a1.003 1.003 0 0 1 1-1m0 4a3 3 0 1 1-3 3a2.996 2.996 0 0 1 3-3" />
+                 <li>
+                    <button type="button"
+                        class="hover:text-gray-800 flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700
+                        {{ request()->routeIs('seguridad.*') ? 'bg-blue-500 text-white hover:bg-blue-600 dark:hover:bg-blue-600' : '' }}"
+                        aria-controls="dropdown-example-seguridad" data-collapse-toggle="dropdown-example-seguridad">
+                        <svg class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white
+                        {{ request()->routeIs('seguridad.*') ? 'text-white dark:text-white hover:text-gray-200' : '' }}"
+                        xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#ffffff" d="M12 12h7c-.53 4.11-3.28 7.78-7 8.92zH5V6.3l7-3.11M12 1L3 5v6c0 5.55 3.84 10.73 9 12c5.16-1.27 9-6.45 9-12V5z"/></svg>
+                        <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Seguridad</span>
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m1 1 4 4 4-4" />
                         </svg>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Roles</span>
-                    </a>
+                    </button>
+                    <ul id="dropdown-example-seguridad" class="hidden py-2 space-y-2">
+                        <li>
+                            <a
+                            href="{{ route('seguridad.roles.index') }}"
+                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700
+                                {{ request()->routeIs('seguridad.roles.index') ? 'bg-blue-400 text-white hover:bg-blue-500 dark:hover:bg-blue-500' : '' }}
+                                 ">Roles</a>
+                        </li>
+                        <li>
+                            <a
+                            href="{{ route('seguridad.permisos.index') }}"
+                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700
+                                {{ request()->routeIs('seguridad.permisos.index') ? 'bg-blue-400 text-white hover:bg-blue-500 dark:hover:bg-blue-500' : '' }}
+                                 ">Permisos</a>
+                        </li>
+
+                    </ul>
                 </li>
                 <li>
                     <a
