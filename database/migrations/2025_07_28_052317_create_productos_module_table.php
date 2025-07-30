@@ -11,8 +11,41 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('productos_module', function (Blueprint $table) {
+        Schema::create('categoria_productos', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre_categoria')->unique();
+            $table->text('observacion')->nullable();
+            $table->softDeletes();
+            $table->timestamps();
+        });
+
+        Schema::create('unidad_medidas', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre_unidad_medida')->unique();
+            $table->string('siglas');
+            $table->text('observacion')->nullable();
+            $table->softDeletes();
+            $table->timestamps();
+        });
+
+        Schema::create('productos', function (Blueprint $table) {
+            $table->id();
+            $table->string('codigo_producto')->unique();
+            $table->string('nombre_producto');
+            $table->integer('uxc')->nullable();
+            $table->decimal('precio_base');
+            $table->decimal('isv')->nullable();
+            $table->decimal('precio_isv');
+            $table->decimal('total_isv');
+            $table->foreignId('categoria_producto_id')
+                ->constrained('categoria_productos');
+            $table->foreignId('unidad_medida_id')
+                ->constrained('unidad_medidas');
+            $table->foreignId('proveedor_id')
+                ->constrained('proveedores');
+            $table->foreignId('creador_id')
+                ->constrained('users');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -22,6 +55,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('productos_module');
+        Schema::dropIfExists('categoria_productos');
+        Schema::dropIfExists('unidad_medidas');
+        Schema::dropIfExists('productos');
     }
 };

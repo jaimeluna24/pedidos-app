@@ -11,8 +11,35 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('proveedor_module', function (Blueprint $table) {
+        Schema::create('tipo_proveedores', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre_tipo_proveedor')->unique();
+            $table->text('observacion')->nullable();
+            $table->softDeletes();
+            $table->timestamps();
+        });
+
+        Schema::create('tipo_adjudicaciones', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre_tipo_adjudicacion')->unique();
+            $table->text('observacion')->nullable();
+            $table->softDeletes();
+            $table->timestamps();
+        });
+
+        Schema::create('proveedores', function (Blueprint $table) {
+            $table->id();
+            $table->string('rtn')->unique();
+            $table->string('nombre_proveedor')->unique();
+            $table->string('telefono')->unique();
+            $table->string('numero_adjudicacion')->unique();
+            $table->foreignId('tipo_adjudicacion_id')
+                ->constrained('tipo_adjudicaciones');
+            $table->foreignId('tipo_proveedor_id')
+                ->constrained('tipo_proveedores');
+            $table->foreignId('creador_id')
+                ->constrained('users');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -22,6 +49,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('proveedor_module');
+        Schema::dropIfExists('tipo_proveedores');
+        Schema::dropIfExists('tipo_adjudicaciones');
+        Schema::dropIfExists('proveedores');
     }
 };
