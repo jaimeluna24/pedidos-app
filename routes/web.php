@@ -5,6 +5,9 @@ use App\Http\Controllers\AuthController;
 use App\Livewire\Dashboard\Dashboard;
 use App\Livewire\Roles\Index as RolesIndex;
 use App\Livewire\Permisos\Index as PermisosIndex;
+use App\Livewire\Usuarios\Index as UsuariosIndex;
+use App\Livewire\Usuarios\Crear as UsuariosCrear;
+use App\Livewire\Usuarios\Detalles as UsuariosDetalles;
 
 Route::get('/', function () {
     return redirect()->route('home');
@@ -17,4 +20,13 @@ Route::post('/loginv', [AuthController::class, 'loginUser'])->name('loginUser');
 Route::get('/inicio', Dashboard::class)->name('inicio');
 Route::get('/roles', RolesIndex::class)->name('seguridad.roles.index');
 Route::get('/permisos', PermisosIndex::class)->name('seguridad.permisos.index');
+
+
+Route::get('/usuarios', UsuariosIndex::class)->name('usuarios.index');
+Route::get('/usuarios/crear', UsuariosCrear::class)->name('usuarios.crear');
+Route::get('/usuarios/detalles/{id}', UsuariosDetalles::class)->name('usuarios.detalles');
+
+
+
+
 

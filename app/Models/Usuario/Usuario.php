@@ -4,13 +4,17 @@ namespace App\Models\Usuario;
 
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Traits\HasPermissions;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Illuminate\Support\Facades\Hash;
 
 class Usuario extends Model
 {
-    use HasRoles, SoftDeletes;
+    use HasRoles, SoftDeletes, HasPermissions;
+
     protected $table = 'users';
+
+    protected $guard_name = 'web';
 
     protected $fillable = [
         'id',
@@ -20,13 +24,19 @@ class Usuario extends Model
         'telefono',
         'email',
         'nombre_usuario',
-        'departamento_id'
+        'departamento_id',
+        'password'
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
     ];
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = Hash::make($value);
+    }
 
     public function departamento()
     {

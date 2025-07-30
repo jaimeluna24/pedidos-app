@@ -6,6 +6,7 @@ use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Usuario\Usuario;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,6 +19,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             DepartamentoSeeder::class
         ]);
+
+        // $role = Role::create(['name' => 'writer']);
 
         Usuario::create([
             'dni' => '0607200100129',
