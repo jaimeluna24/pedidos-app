@@ -325,11 +325,11 @@
                 <li>
                     <button type="button"
                         class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 hover:text-gray-900
-                        {{-- {{ request()->routeIs('mantenimientos.*') ? 'bg-blue-500 text-white hover:bg-blue-600 dark:hover:bg-blue-600' : '' }} --}}
+                        {{ request()->routeIs('mantenimientos.*') ? 'bg-blue-500 text-white hover:bg-blue-600 dark:hover:bg-blue-600' : '' }}
                          "
                         aria-controls="dropdown-example-1" data-collapse-toggle="dropdown-example-1">
                         <svg class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white
-                        {{-- {{ request()->routeIs('mantenimientos.*') ? 'text-white dark:text-white hover:text-gray-200' : '' }} --}}
+                        {{ request()->routeIs('mantenimientos.*') ? 'text-white dark:text-white hover:text-gray-200' : '' }}
                          "
                             xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                             <path fill="#ffff" stroke="currentColor" stroke-width="2"
@@ -345,11 +345,10 @@
                     <ul id="dropdown-example-1" class="hidden py-2 space-y-2">
                         <li>
                             <a
-                            {{-- href="{{ route('mantenimientos.tipo-certificacion.index') }}" --}}
+                            href="{{ route('mantenimientos.categorias.index') }}"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700
-                                {{-- {{ request()->routeIs('mantenimientos.tipo-certificacion.*') ? 'bg-blue-400 text-white hover:bg-blue-500 dark:hover:bg-blue-500' : '' }} --}}
-                                 ">Tipo
-                                Certificación</a>
+                                {{ request()->routeIs('mantenimientos.categorias.*') ? 'bg-blue-400 text-white hover:bg-blue-500 dark:hover:bg-blue-500' : '' }}
+                                 ">Categoría de Productos</a>
                         </li>
                         <li>
                             <a

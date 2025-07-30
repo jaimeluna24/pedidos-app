@@ -20,8 +20,7 @@ class AuthController extends Controller
 	    // Comprobamos si el usuario ya está logado
 	    if (Auth::check()) {
 
-	        // Si está logado le mostramos la vista de logados
-	        return view('livewire.dashboard.dashboard');
+	         return redirect()->intended('/inicio');
 	    }
 
 	    // Si no está logado le mostramos la vista con el formulario de login
@@ -41,7 +40,7 @@ class AuthController extends Controller
 
 	    // Si el usuario existe lo logamos y lo llevamos a la vista de "logados" con un mensaje
 	    if (Auth::attempt($credentials)) {
-	        return redirect()->intended('')
+	        return redirect()->intended('/inicio')
 	            ->withSuccess('Logado Correctamente');
 	    }
 

@@ -7,7 +7,7 @@
          <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-800 w-2/5">
              <!-- Modal body -->
              <div class="mb-6 p-5">
-                    <h3 class="text-lg font-bold mb-6 text-md text-gray-900 dark:text-white">Ediar Pol</h3>
+                    <h3 class="text-lg font-bold mb-6 text-md text-gray-900 dark:text-white">Editar Pol</h3>
 
                  <label for="first_name" class="block mb-2 text-md font-medium text-gray-900 dark:text-white">
                      Nombre del rol</label>
@@ -17,7 +17,7 @@
              </div>
              <!-- Modal footer -->
              <div class="flex items-center p-2 justify-end border-t border-gray-200 rounded-b dark:border-gray-600 gap-4">
-                 <button type="button" wire:click="$set('modal', false);"
+                 <button type="button" wire:click="cerrarEditar()"
                      class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Cancelar</button>
                      <button data-modal-hide="modal-editar-detalle" type="button" wire:click="editar()"
                      class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">

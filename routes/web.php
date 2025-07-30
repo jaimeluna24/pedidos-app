@@ -8,6 +8,7 @@ use App\Livewire\Permisos\Index as PermisosIndex;
 use App\Livewire\Usuarios\Index as UsuariosIndex;
 use App\Livewire\Usuarios\Crear as UsuariosCrear;
 use App\Livewire\Usuarios\Detalles as UsuariosDetalles;
+use App\Livewire\CategoriaProductos\Index as CategoriaIndex;
 
 Route::get('/', function () {
     return redirect()->route('home');
@@ -25,6 +26,11 @@ Route::get('/permisos', PermisosIndex::class)->name('seguridad.permisos.index');
 Route::get('/usuarios', UsuariosIndex::class)->name('usuarios.index');
 Route::get('/usuarios/crear', UsuariosCrear::class)->name('usuarios.crear');
 Route::get('/usuarios/detalles/{id}', UsuariosDetalles::class)->name('usuarios.detalles');
+
+
+// Mantenimiento
+Route::get('/mantenimiento/categoria-productos', CategoriaIndex::class)->name('mantenimientos.categorias.index');
+
 
 
 

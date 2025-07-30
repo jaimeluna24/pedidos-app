@@ -6,7 +6,7 @@
         <div class="flex flex-column sm:flex-row flex-wrap space-y-1 sm:space-y-0 items-center justify-between ">
             <div class="flex items-center gap-8">
                 <div class="text-2xl font-semibold text-gray-900 dark:text-white">
-                    Roles
+                    Categoría de Productos
                 </div>
             </div>
             <div class="flex justify-between gap-4 w-full md:w-1/2">
@@ -22,7 +22,7 @@
                     </div>
                     <input wire:model.live="query" type="text" id="table-search"
                         class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Buscar rol">
+                        placeholder="Buscar por nombre">
                 </div>
                 <div>
                     <button type="button" onclick="my_modal_2.showModal()"
@@ -32,7 +32,7 @@
         </div>
     </div>
 
-    @if ($roles->isEmpty())
+    @if ($categorias->isEmpty())
         <x-empty />
     @else
         <div class="relative overflow-x-auto shadow-md rounded-lg">
@@ -43,7 +43,7 @@
                             #
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Nombre del Rol
+                            Nombre de Categoría
                         </th>
                         <th scope="col" class="px-6 py-3 hidden md:table-cell">
                             Fecha
@@ -55,7 +55,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($roles as $index => $item)
+                    @foreach ($categorias as $index => $item)
                         <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
                            <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -63,7 +63,7 @@
                             </th>
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $item->name }}
+                                {{ $item->nombre_categoria }}
                             </th>
                             <td class="px-6 py-4 hidden md:table-cell">
                                 {{ $item->created_at }}
@@ -78,18 +78,18 @@
                     @endforeach
                 </tbody>
             </table>
-            @if ($roles->hasPages())
+            @if ($categorias->hasPages())
                 <div class="mt-4">
-                    {{ $roles->links() }}
+                    {{ $categorias->links() }}
                 </div>
             @endif
         </div>
     @endif
 
-    @include('livewire.roles.crear')
+    @include('livewire.categoria-productos.crear')
 
     @if($modal)
-    @include('livewire.roles.editar')
+    @include('livewire.categoria-productos.editar')
     @endif
 
     <div wire:loading>

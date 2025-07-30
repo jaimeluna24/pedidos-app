@@ -44,6 +44,11 @@ class Index extends Component
         $this->modal = true;
     }
 
+    public function cerrarEditar()
+    {
+        $this->reset(['modal', 'name']);
+    }
+
     public function editar()
     {
         $this->validate([
