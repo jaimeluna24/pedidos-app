@@ -79,7 +79,7 @@ class Detalles extends Component
 
         $this->modo_vista = true;
 
-        session()->flash('success', 'Usuario creado exitosamente.');
+        session()->flash('success', 'Usuario editado exitosamente.');
     }
 
     public function eliminar()

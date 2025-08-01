@@ -9,6 +9,14 @@ use App\Livewire\Usuarios\Index as UsuariosIndex;
 use App\Livewire\Usuarios\Crear as UsuariosCrear;
 use App\Livewire\Usuarios\Detalles as UsuariosDetalles;
 use App\Livewire\CategoriaProductos\Index as CategoriaIndex;
+use App\Livewire\Productos\Index as ProductosIndex;
+use App\Livewire\Productos\Crear as ProductosCrear;
+use App\Livewire\Productos\Detalles as ProductosDetalles;
+use App\Livewire\Pedidos\Index as PedidosIndex;
+use App\Livewire\Pedidos\Crear as PedidosCrear;
+use App\Livewire\Pedidos\AddProducto as PedidosAddProductos;
+use App\Livewire\Pedidos\Detalles as PedidosDetalles;
+use App\Livewire\Pedidos\Editar as PedidosEditar;
 
 Route::get('/', function () {
     return redirect()->route('home');
@@ -18,6 +26,7 @@ Route::get('/home', [AuthController::class, 'index'])->name('home');
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/loginv', [AuthController::class, 'loginUser'])->name('loginUser');
 
+Route::middleware('auth')->group(function () {
 Route::get('/inicio', Dashboard::class)->name('inicio');
 Route::get('/roles', RolesIndex::class)->name('seguridad.roles.index');
 Route::get('/permisos', PermisosIndex::class)->name('seguridad.permisos.index');
@@ -32,7 +41,17 @@ Route::get('/usuarios/detalles/{id}', UsuariosDetalles::class)->name('usuarios.d
 Route::get('/mantenimiento/categoria-productos', CategoriaIndex::class)->name('mantenimientos.categorias.index');
 
 
+// Productos
+Route::get('/productos', ProductosIndex::class)->name('productos.index');
+Route::get('/productos/crear', ProductosCrear::class)->name('productos.crear');
+Route::get('/productos/detalles/{id}', ProductosDetalles::class)->name('productos.detalles');
 
 
-
+// Pedidos
+Route::get('/pedidos', PedidosIndex::class)->name('pedidos.index');
+Route::get('/pedidos/crear', PedidosCrear::class)->name('pedidos.crear');
+Route::get('/pedidos/crear/agregar-productos/{numero_pedido}/{proveedor_id}', PedidosAddProductos::class)->name('pedidos.agregar.productos');
+Route::get('/pedidos/detalles/{id}', PedidosDetalles::class)->name('pedidos.detalles');
+Route::get('/pedidos/editar/{numero_pedido}/{proveedor_id}', PedidosEditar::class)->name('pedidos.editar');
+});
 

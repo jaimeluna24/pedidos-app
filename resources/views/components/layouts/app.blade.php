@@ -86,14 +86,17 @@
                         <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-sm shadow-sm dark:bg-gray-700 dark:divide-gray-600"
                             id="dropdown-user">
                             <div class="px-4 py-3" role="none">
-                                <p class="text-sm text-gray-900 dark:text-white" role="none">
-                                    {{-- {{ session('usuario_nombre') }} --}}
+                                <p class="text-sm mb-2 font-medium text-gray-900 dark:text-gray-300" role="none">
+                                    {{ auth()->user()->nombre }} {{ auth()->user()->apellido }}
                                 </p>
-                                <p class="text-sm text-gray-900 dark:text-white" role="none">
-                                    {{-- {{ session('usuario_correo') }} --}}
+                                <p class="text-sm mb-2 font-medium text-gray-900 dark:text-gray-300" role="none">
+                                    {{ auth()->user()->nombre_usuario }}
                                 </p>
-                                <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                                    {{-- Eres: {{ session('usuario_rol') }} --}}
+                                <p class="text-sm mb-2 font-medium text-gray-900 dark:text-gray-300" role="none">
+                                    {{ auth()->user()->departamento->nombre_departamento }}
+                                </p>
+                                <p class="text-sm mb-2 font-medium text-gray-900 truncate dark:text-gray-300" role="none">
+                                   Eres: {{ auth()->user()->getRoleNames()->first(); }}
                                 </p>
                             </div>
                             <ul class="py-1" role="none">
@@ -137,17 +140,13 @@
                  <li>
                     <button type="button"
                         class="hover:text-gray-800 flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700
-                        {{-- {{ request()->routeIs('tramites.*') ? 'bg-blue-500 text-white hover:bg-blue-600 dark:hover:bg-blue-600' : '' }} --}}
+                        {{ request()->routeIs('pedidos.*') ? 'bg-blue-500 text-white hover:bg-blue-600 dark:hover:bg-blue-600' : '' }}
                          "
                         aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
-
                         <svg class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white
-                        {{-- {{ request()->routeIs('tramites.*') ? 'text-white dark:text-white hover:text-gray-200' : '' }} --}}
-                         "
-                            xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
-                            <path fill="currentColor"
-                                d="M13.981 2H6.018s-.996 0-.996 1h9.955c0-1-.996-1-.996-1m2.987 3c0-1-.995-1-.995-1H4.027s-.995 0-.995 1v1h13.936zm1.99 1l-.588-.592V7H1.63V5.408L1.041 6C.452 6.592.03 6.75.267 8c.236 1.246 1.379 8.076 1.549 9c.186 1.014 1.217 1 1.217 1h13.936s1.03.014 1.217-1c.17-.924 1.312-7.754 1.549-9c.235-1.25-.187-1.408-.777-2M14 11.997c0 .554-.449 1.003-1.003 1.003H7.003A1.003 1.003 0 0 1 6 11.997V10h1v2h6v-2h1z" />
-                        </svg>
+                        {{ request()->routeIs('pedidos.*') ? 'text-white dark:text-white hover:text-gray-200' : '' }}
+                         " xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="m17.275 20.25l3.475-3.45l-1.05-1.05l-2.425 2.375l-.975-.975l-1.05 1.075zM6 9h12V7H6zm12 14q-2.075 0-3.537-1.463T13 18t1.463-3.537T18 13t3.538 1.463T23 18t-1.463 3.538T18 23M3 22V5q0-.825.588-1.412T5 3h14q.825 0 1.413.588T21 5v6.675q-.7-.35-1.463-.513T18 11H6v2h7.1q-.425.425-.787.925T11.675 15H6v2h5.075q-.05.25-.062.488T11 18q0 1.05.288 2.013t.862 1.837L12 22l-1.5-1.5L9 22l-1.5-1.5L6 22l-1.5-1.5z"/></svg>
+
                         <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Pedidos</span>
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 10 6">
@@ -158,10 +157,10 @@
                     <ul id="dropdown-example" class="hidden py-2 space-y-2">
                         <li>
                             <a
-                            {{-- href="{{ route('tramites.pendientes') }}" --}}
+                            href="{{ route('pedidos.index') }}"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700
-                                {{-- {{ request()->routeIs('tramites.pendientes') ? 'bg-blue-400 text-white hover:bg-blue-500 dark:hover:bg-blue-500' : '' }} --}}
-                                 ">Pendientes</a>
+                                {{ request()->routeIs('pedidos.index') ? 'bg-blue-400 text-white hover:bg-blue-500 dark:hover:bg-blue-500' : '' }}
+                                 ">Lista de Pedidos</a>
                         </li>
                         <li>
                             <a
@@ -181,19 +180,14 @@
                 </li>
                   <li>
                         <a
-                        {{-- href="{{ route('mis-solicitudes.index') }}" --}}
+                        href="{{ route('productos.index') }}"
                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-700 group
-                            {{-- {{ request()->routeIs('mis-solicitudes.*') ? 'bg-blue-500 text-white hover:bg-blue-600 dark:hover:bg-blue-600' : '' }} --}}
+                            {{ request()->routeIs('productos.*') ? 'bg-blue-500 text-white hover:bg-blue-600 dark:hover:bg-blue-600' : '' }}
                              ">
-                            <svg class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white
-                            {{-- {{ request()->routeIs('mis-solicitudes.*') ? 'text-white dark:text-white hover:text-gray-200' : '' }} --}}
-                             "
-                                xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                viewBox="0 0 24 24">
-                                <path fill="currentColor" fill-rule="evenodd"
-                                    d="M9 7V2.2a2 2 0 0 0-.5.4l-4 3.9a2 2 0 0 0-.3.5zm2 0V2h7a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9h5a2 2 0 0 0 2-2m2-2a1 1 0 1 0 0 2h3a1 1 0 1 0 0-2zm0 3a1 1 0 1 0 0 2h3a1 1 0 1 0 0-2zm-6 4c0-.6.4-1 1-1h8c.6 0 1 .4 1 1v6c0 .6-.4 1-1 1H8a1 1 0 0 1-1-1zm8 1v1h-2v-1zm0 3h-2v1h2zm-4-3v1H9v-1zm0 3H9v1h2z"
-                                    clip-rule="evenodd" />
-                            </svg>
+                             <svg class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white
+                            {{ request()->routeIs('productos.*') ? 'text-white dark:text-white hover:text-gray-200' : '' }}
+                             " xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path fill="currentColor" d="M17 8h1v11H2V8h1V6c0-2.76 2.24-5 5-5c.71 0 1.39.15 2 .42A4.9 4.9 0 0 1 12 1c2.76 0 5 2.24 5 5zM5 6v2h2V6c0-1.13.39-2.16 1.02-3H8C6.35 3 5 4.35 5 6m10 2V6c0-1.65-1.35-3-3-3h-.02A4.98 4.98 0 0 1 13 6v2zm-5-4.22C9.39 4.33 9 5.12 9 6v2h2V6c0-.88-.39-1.67-1-2.22"/></svg>
+
                             <span class="flex-1 ms-3 whitespace-nowrap">Productos</span>
                         </a>
                     </li>
@@ -203,15 +197,10 @@
                         class="hover:text-gray-800 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group
                         {{-- {{ request()->routeIs('roles.*') ? 'bg-blue-500 text-white hover:bg-blue-600 dark:hover:bg-blue-600' : '' }} --}}
                          ">
-                        <svg class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white
+                         <svg class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white
                         {{-- {{ request()->routeIs('roles.*') ? 'text-white dark:text-white hover:text-gray-200' : '' }} --}}
-                         "
-                            xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-                            <path fill="currentColor"
-                                d="M15 21h-2a2 2 0 0 1 0-4h2v-2h-2a4 4 0 0 0 0 8h2Zm8-2a4 4 0 0 1-4 4h-2v-2h2a2 2 0 0 0 0-4h-2v-2h2a4 4 0 0 1 4 4" />
-                            <path fill="currentColor"
-                                d="M14 18h4v2h-4zm-7 1a6 6 0 0 1 .09-1H3v-1.4c0-2 4-3.1 6-3.1a8.6 8.6 0 0 1 1.35.125A5.95 5.95 0 0 1 13 13h5V4a2.006 2.006 0 0 0-2-2h-4.18a2.988 2.988 0 0 0-5.64 0H2a2.006 2.006 0 0 0-2 2v14a2.006 2.006 0 0 0 2 2h5.09A6 6 0 0 1 7 19M9 2a1 1 0 1 1-1 1a1.003 1.003 0 0 1 1-1m0 4a3 3 0 1 1-3 3a2.996 2.996 0 0 1 3-3" />
-                        </svg>
+                         " xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g fill="none" fill-rule="evenodd"><path d="m12.594 23.258l-.012.002l-.071.035l-.02.004l-.014-.004l-.071-.036q-.016-.004-.024.006l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.016-.018m.264-.113l-.014.002l-.184.093l-.01.01l-.003.011l.018.43l.005.012l.008.008l.201.092q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.003-.011l.018-.43l-.003-.012l-.01-.01z"/><path fill="currentColor" fill-rule="nonzero" d="M9 15v-1h1v1z"/><path fill="currentColor" d="M18 2a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm-7.5 10h-2A1.5 1.5 0 0 0 7 13.5v2A1.5 1.5 0 0 0 8.5 17h2a1.5 1.5 0 0 0 1.5-1.5v-2a1.5 1.5 0 0 0-1.5-1.5m5.5 1.5h-2a1 1 0 0 0-.117 1.993L14 15.5h2a1 1 0 0 0 .117-1.993zm-5.866-6.737L8.72 8.177l-.354-.354a1 1 0 1 0-1.414 1.414l.884.884a1.25 1.25 0 0 0 1.768 0l1.944-1.944a1 1 0 0 0-1.414-1.414M16 8h-2a1 1 0 0 0-.117 1.993L14 10h2a1 1 0 0 0 .117-1.993z"/></g></svg>
+
                         <span class="flex-1 ms-3 whitespace-nowrap">Inventarios</span>
                     </a>
                 </li>
@@ -273,7 +262,7 @@
                         aria-controls="dropdown-example-seguridad" data-collapse-toggle="dropdown-example-seguridad">
                         <svg class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white
                         {{ request()->routeIs('seguridad.*') ? 'text-white dark:text-white hover:text-gray-200' : '' }}"
-                        xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#ffffff" d="M12 12h7c-.53 4.11-3.28 7.78-7 8.92zH5V6.3l7-3.11M12 1L3 5v6c0 5.55 3.84 10.73 9 12c5.16-1.27 9-6.45 9-12V5z"/></svg>
+                        xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M12 12h7c-.53 4.11-3.28 7.78-7 8.92zH5V6.3l7-3.11M12 1L3 5v6c0 5.55 3.84 10.73 9 12c5.16-1.27 9-6.45 9-12V5z"/></svg>
                         <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Seguridad</span>
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 10 6">

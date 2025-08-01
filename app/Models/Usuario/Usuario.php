@@ -8,7 +8,9 @@ use Spatie\Permission\Traits\HasPermissions;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Hash;
 
-class Usuario extends Model
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class Usuario extends Authenticatable
 {
     use HasRoles, SoftDeletes, HasPermissions;
 

@@ -21,9 +21,10 @@ class DatabaseSeeder extends Seeder
             CategoriaProductoSeeder::class
         ]);
 
-        // $role = Role::create(['name' => 'writer']);
+        Role::create(['name' => 'Administrador']);
+        Role::create(['name' => 'Cliente']);
 
-        Usuario::create([
+        $usuario = Usuario::create([
             'dni' => '0607200100129',
             'nombre' => 'Jaime David',
             'apellido' => 'Luna Ponce',
@@ -33,5 +34,7 @@ class DatabaseSeeder extends Seeder
             'password' => '12345678',
             'departamento_id' => 1
         ]);
+
+        $usuario->assignRole('Administrador');
     }
 }
