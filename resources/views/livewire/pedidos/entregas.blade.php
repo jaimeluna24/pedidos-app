@@ -6,7 +6,7 @@
         <div class="flex flex-column sm:flex-row flex-wrap space-y-1 sm:space-y-0 items-center justify-between ">
             <div class="flex items-center gap-8">
                 <div class="text-2xl font-semibold text-gray-900 dark:text-white">
-                    Lista de Pedidos
+                    Lista de Entregas
                 </div>
             </div>
             <div class="flex justify-between gap-4 w-full md:w-1/2">
@@ -22,10 +22,10 @@
                     </div>
                     <input wire:model.live="query" type="text" id="table-search"
                         class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Buscar por número de pedido o proveedor">
+                        placeholder="Buscar por número de pedido o factura">
                 </div>
                 <div>
-                    <a href="{{ route('pedidos.crear') }}">
+                    <a href="{{ route('pedidos.entregas.crear') }}">
                         <button type="button"
                             class="w-full md:w-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Nuevo</button>
                     </a>
@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    @if ($pedidos->isEmpty())
+    @if ($entregas->isEmpty())
         <x-empty />
     @else
         <div class="relative overflow-x-auto shadow-md rounded-lg">
@@ -43,22 +43,22 @@
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                            Código
+                            Código de Pedido
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Factura
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Proveedor
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Estado
                         </th>
                         <th scope="col" class="px-6 py-3 hidden md:table-cell">
                             Fecha Solicitado
                         </th>
                         <th scope="col" class="px-6 py-3 hidden md:table-cell">
-                            Fecha Respuesta
+                            Fecha Aprobado
                         </th>
-                        <th scope="col" class="px-6 py-3">
-                            Entrega
+                        <th scope="col" class="px-6 py-3 hidden md:table-cell">
+                            Fecha Entregado
                         </th>
                         <th scope="col" class="px-6 py-3">
                             <span class="sr-only">Edit</span>
@@ -67,75 +67,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($pedidos as $index => $item)
+                    @foreach ($entregas as $index => $item)
                         <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
                             <th scope="row"
                                 class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $item->numero_pedido }}
+                                {{ $item->pedido->numero_pedido }}
                             </th>
                             <td scope="row" class="px-4 py-2  whitespace-nowrap">
-                                {{ $item->proveedor->nombre_proveedor }}
+                                {{ $item->num_factura }}
                             </td>
                             <td scope="row" class="px-4 py-2  whitespace-nowrap">
-                                @switch($item->estado_pedido)
-                                    @case('Aprobado')
-                                        <span
-                                            class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-green-900 dark:text-green-300">{{ $item->estado_pedido }}</span>
-                                    @break
-
-                                    @case('Cancelado')
-                                        <span
-                                            class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-red-900 dark:text-red-300">{{ $item->estado_pedido }}</span>
-                                    @break
-
-                                    @case('Pendiente')
-                                        <span
-                                            class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-gray-700 dark:text-gray-300">{{ $item->estado_pedido }}</span>
-                                    @break
-
-                                    @default
-                                @endswitch
-
+                                {{ $item->pedido->proveedor->nombre_proveedor }}
                             </td>
                             <td scope="row" class="px-4 py-2 whitespace-nowrap">
+                                {{ $item->pedido->created_at }}
+                            </td>
+                            <td class="px-4 py-2 hidden md:table-cell">
+                                {{ $item->pedido->fecha_respuesta }}
+                            </td>
+                            <td class="px-4 py-2 hidden md:table-cell">
                                 {{ $item->created_at }}
                             </td>
-                            <td class="px-4 py-2 hidden md:table-cell">
-                                {{ $item->fecha_respuesta ?? 'Sin Respuesta' }}
-                            </td>
-                            <td class="px-4 py-2 hidden md:table-cell">
-                                @switch( $item->estado_entrega ?? 'Sin respuesta')
-                                    @case('Entregado')
-                                        <span
-                                            class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-green-900 dark:text-green-300"> {{ $item->estado_entrega }}</span>
-                                    @break
-
-                                    @case('Cancelada')
-                                        <span
-                                            class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-red-900 dark:text-red-300"> {{ $item->estado_entrega }}</span>
-                                    @break
-
-                                    @case('Pendiente')
-                                        <span
-                                            class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-gray-700 dark:text-gray-300"> {{ $item->estado_entrega }}</span>
-                                    @break
-
-                                    @case('Suspendida')
-                                        <span
-                                            class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-yellow-900 dark:text-yellow-300"> {{ $item->estado_entrega }}</span>
-                                    @break
-                                    @case('Sin respuesta')
-                                        <span
-                                            class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-yellow-900 dark:text-yellow-300">N/A</span>
-                                    @break
-
-                                    @default
-                                @endswitch
-
-
-                            </td>
                             <td class="px-4 py-2 text-right">
-                                <a href="{{ route('pedidos.detalles', $item->id) }}">
+                                <a href="{{ route('pedidos.entregas.detalles', $item->id) }}">
                                     <button type="button"
                                         class="w-full md:w-auto text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 focus:outline-none dark:focus:ring-orange-800">Detalles</button>
                                 </a>
@@ -144,9 +98,9 @@
                     @endforeach
                 </tbody>
             </table>
-            @if ($pedidos->hasPages())
+            @if ($entregas->hasPages())
                 <div class="mt-4">
-                    {{ $pedidos->links() }}
+                    {{ $entregas->links() }}
                 </div>
             @endif
         </div>

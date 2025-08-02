@@ -164,10 +164,10 @@
                         </li>
                         <li>
                             <a
-                            {{-- href="{{ route('providencias.index') }}" --}}
+                            href="{{ route('pedidos.entregas') }}"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700
-                                {{-- {{ request()->routeIs('providencias.*') ? 'bg-blue-400 text-white hover:bg-blue-500 dark:hover:bg-blue-500' : '' }} --}}
-                                 ">Providencias</a>
+                                {{ request()->routeIs('pedidos.entregas*') ? 'bg-blue-400 text-white hover:bg-blue-500 dark:hover:bg-blue-500' : '' }}
+                                 ">Entregas</a>
                         </li>
                         <li>
                             <a

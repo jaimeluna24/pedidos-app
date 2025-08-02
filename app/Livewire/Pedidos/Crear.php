@@ -14,7 +14,6 @@ class Crear extends Component
     public $numero_pedido;
     public $proveedor_id = 'Seleccione';
 
-
     public function mount()
     {
         $user = Auth::user();

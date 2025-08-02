@@ -28,7 +28,12 @@ class PedidoEntrega extends Model
 
     public function pedido()
     {
-        return $this->belongsTo(Pedido::class, 'usuario_id');
+        return $this->belongsTo(Pedido::class, 'pedido_id');
+    }
+
+     public function detalles()
+    {
+        return $this->hasMany(DetalleEntrega::class);
     }
 
     public function productos()

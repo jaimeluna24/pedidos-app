@@ -7,6 +7,9 @@ use App\Models\Pedido\Pedido;
 use App\Models\Pedido\DetallePedido;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
+use Spatie\Browsershot\Browsershot;
 
 class Detalles extends Component
 {
@@ -17,6 +20,7 @@ class Detalles extends Component
     public $proveedor_id;
     public $usuario_id;
     public $nombre_proveedor;
+    public $user;
 
     public $query = '';
     public $productosPedidos = [];
@@ -24,6 +28,7 @@ class Detalles extends Component
     public function mount($id)
     {
         $this->id = $id;
+        $this->user = Auth::user();
         $pedido = Pedido::with('detalles')->find($id);
         $this->pedido = $pedido;
         $this->numero_pedido = $pedido->numero_pedido;
@@ -46,18 +51,96 @@ class Detalles extends Component
     }
 
 
-     public function eliminar()
+    public function eliminar()
     {
         try {
             $this->pedido->delete();
 
             redirect()->route('pedidos.index');
-            session()->flash('success', 'Producto eliminado exitosamente.');
+            session()->flash('success', 'Pedido eliminado exitosamente.');
         } catch (ValidationException $e) {
             session()->flash('error', 'Error de validación. Verifica los campos.');
         } catch (\Exception $e) {
-            Log::error('Error al editar el producto: ' . $e->getMessage());
-            session()->flash('error', 'Ocurrió un error inesperado al editar el producto.');
+            Log::error('Error al eliminar el pedido: ' . $e->getMessage());
+            session()->flash('error', 'Ocurrió un error inesperado al eliminar el pedido.');
         }
+    }
+
+    public function aprobar()
+    {
+        try {
+            $this->pedido->update([
+                'estado_pedido' => 'Aprobado',
+                'estado_entrega' => 'Pendiente',
+                'fecha_respuesta' => now(),
+                'respondido_por' => $this->user->nombre_usuario,
+            ]);
+
+            redirect()->route('pedidos.detalles', $this->id);
+            session()->flash('success', 'Pedido aprobado exitosamente.');
+        } catch (ValidationException $e) {
+            session()->flash('error', 'Error de validación. Verifica los campos.');
+        } catch (\Exception $e) {
+            Log::error('Error al aprobar el pedido: ' . $e->getMessage());
+            session()->flash('error', 'Ocurrió un error inesperado al aprobar el pedido.');
+        }
+    }
+
+    public function cancelar()
+    {
+        try {
+            $this->pedido->update([
+                'estado_pedido' => 'Cancelado',
+                'fecha_respuesta' => now(),
+                'respondido_por' => $this->user->nombre_usuario,
+            ]);
+
+            redirect()->route('pedidos.detalles', $this->id);
+            session()->flash('success', 'Pedido cancelado exitosamente.');
+        } catch (ValidationException $e) {
+            session()->flash('error', 'Error de validación. Verifica los campos.');
+        } catch (\Exception $e) {
+            Log::error('Error al cancelar el pedido: ' . $e->getMessage());
+            session()->flash('error', 'Ocurrió un error inesperado al cancelar el pedido.');
+        }
+    }
+
+    public function generarPDF()
+    {
+        $html = View::make('pdf.pedidos-pdf-plantilla', [
+            'numero_pedido' => $this->pedido->numero_pedido,
+            'fecha_pedido' => $this->pedido->created_at->format('Y/m/d'),
+            'nombre_proveedor' => $this->pedido->proveedor->nombre_proveedor,
+            'numero_adjudicacion' => $this->pedido->proveedor->numero_adjudicacion,
+            'estado_pedido' => $this->pedido->estado_pedido,
+            'rtn_proveedor' => $this->pedido->proveedor->rtn,
+            'telefono' => $this->pedido->proveedor->telefono,
+            'detalle_pedido' => $this->productosPedidos,
+            'nombre_completo' => $this->user->nombre . ' ' . $this->user->apellido,
+            'dni' => $this->user->dni,
+            'email' => $this->user->email ?? 'N/A',
+            'nombre_usuario' => $this->user->nombre_usuario,
+            'departamento' => $this->user->departamento->nombre_departamento,
+            'telefono_usuario' => $this->user->telefono,
+        ])->render();
+
+        $pdfContent = Browsershot::html($html)
+            ->showBackground()
+            ->format('Letter')
+            ->margins(0, 0, 0, 0)
+            ->footerText('Página {{page}} de {{pages}}')
+            ->footerFontSize(10)
+            ->footerSpacing(5)
+            ->pdf(); // Esto obtiene el contenido del PDF como string
+
+        return response()->streamDownload(
+            function () use ($pdfContent) {
+                echo $pdfContent;
+            },
+            'CERTIFICACION_INTEGRA_DE_DOCUMENTOS.pdf',
+            [
+                'Content-Type' => 'application/pdf',
+            ]
+        );
     }
 }

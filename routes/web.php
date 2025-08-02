@@ -17,6 +17,10 @@ use App\Livewire\Pedidos\Crear as PedidosCrear;
 use App\Livewire\Pedidos\AddProducto as PedidosAddProductos;
 use App\Livewire\Pedidos\Detalles as PedidosDetalles;
 use App\Livewire\Pedidos\Editar as PedidosEditar;
+use App\Livewire\Pedidos\Entregas as PedidosEntregas;
+use App\Livewire\Pedidos\CrearEntregas as PedidosEntregasCrear;
+use App\Livewire\Pedidos\AddProductosEntrega as PedidosAddProductosEntregas;
+use App\Livewire\Pedidos\DetallesEntrega as PedidosDetallesEntregas;
 
 Route::get('/', function () {
     return redirect()->route('home');
@@ -53,5 +57,10 @@ Route::get('/pedidos/crear', PedidosCrear::class)->name('pedidos.crear');
 Route::get('/pedidos/crear/agregar-productos/{numero_pedido}/{proveedor_id}', PedidosAddProductos::class)->name('pedidos.agregar.productos');
 Route::get('/pedidos/detalles/{id}', PedidosDetalles::class)->name('pedidos.detalles');
 Route::get('/pedidos/editar/{numero_pedido}/{proveedor_id}', PedidosEditar::class)->name('pedidos.editar');
+
+Route::get('/pedidos/entregas', PedidosEntregas::class)->name('pedidos.entregas');
+Route::get('/pedidos/entregas/crear', PedidosEntregasCrear::class)->name('pedidos.entregas.crear');
+Route::get('/pedidos/entregas/crear/agregar-productos/{numero_pedido}/{tipo}/{factura}', PedidosAddProductosEntregas::class)->name('pedidos.entregas.agregar.productos');
+Route::get('/pedidos/entregas/detalles/{id}', PedidosDetallesEntregas::class)->name('pedidos.entregas.detalles');
 });
 
