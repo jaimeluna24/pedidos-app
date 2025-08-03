@@ -21,6 +21,7 @@ use App\Livewire\Pedidos\Entregas as PedidosEntregas;
 use App\Livewire\Pedidos\CrearEntregas as PedidosEntregasCrear;
 use App\Livewire\Pedidos\AddProductosEntrega as PedidosAddProductosEntregas;
 use App\Livewire\Pedidos\DetallesEntrega as PedidosDetallesEntregas;
+use App\Livewire\Inventarios\Index as InventariosIndex;
 
 Route::get('/', function () {
     return redirect()->route('home');
@@ -62,5 +63,10 @@ Route::get('/pedidos/entregas', PedidosEntregas::class)->name('pedidos.entregas'
 Route::get('/pedidos/entregas/crear', PedidosEntregasCrear::class)->name('pedidos.entregas.crear');
 Route::get('/pedidos/entregas/crear/agregar-productos/{numero_pedido}/{tipo}/{factura}', PedidosAddProductosEntregas::class)->name('pedidos.entregas.agregar.productos');
 Route::get('/pedidos/entregas/detalles/{id}', PedidosDetallesEntregas::class)->name('pedidos.entregas.detalles');
+
+// Inventario
+Route::get('/Inventarios', InventariosIndex::class)->name('inventarios.index');
+
+
 });
 

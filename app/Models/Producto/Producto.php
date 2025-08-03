@@ -2,6 +2,7 @@
 
 namespace App\Models\Producto;
 
+use App\Models\Inventario\Inventario;
 use App\Models\Proveedor\Proveedor;
 use App\Models\Usuario\Usuario;
 use Illuminate\Database\Eloquent\Model;
@@ -54,6 +55,11 @@ class Producto extends Model
     public function detallesPedidos()
     {
         return $this->hasMany(DetallePedido::class);
+    }
+
+    public function inventario()
+    {
+        return $this->hasMany(Inventario::class);
     }
 
     public function pedidos()

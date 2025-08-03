@@ -2,6 +2,7 @@
 
 namespace App\Models\Pedido;
 
+use App\Models\Inventario\MovimientoInventario;
 use App\Models\Producto\Producto;
 use App\Models\Usuario\Usuario;
 use Illuminate\Database\Eloquent\Model;
@@ -31,7 +32,7 @@ class PedidoEntrega extends Model
         return $this->belongsTo(Pedido::class, 'pedido_id');
     }
 
-     public function detalles()
+    public function detalles()
     {
         return $this->hasMany(DetalleEntrega::class);
     }
@@ -40,5 +41,10 @@ class PedidoEntrega extends Model
     {
         return $this->belongsToMany(Producto::class, 'detalle_entregas')
             ->withPivot(['cantidad', 'precio_unitario', 'subtotal']);
+    }
+
+    public function movimientos()
+    {
+        return $this->hasMany(MovimientoInventario::class);
     }
 }

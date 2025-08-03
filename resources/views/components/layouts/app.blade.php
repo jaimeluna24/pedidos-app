@@ -121,12 +121,12 @@
             <ul class="space-y-2 font-medium">
                     <li>
                         <a
-                        {{-- href="{{ route('inicio') }}" --}}
+                        href="{{ route('inicio') }}"
                             class="flex items-center hover:text-gray-800 p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group
-                            {{-- {{ request()->routeIs('inicio') ? 'bg-blue-500 text-white hover:bg-blue-600 dark:hover:bg-blue-600' : '' }} --}}
+                            {{ request()->routeIs('inicio') ? 'bg-blue-500 text-white hover:bg-blue-600 dark:hover:bg-blue-600' : '' }}
                              ">
                             <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white
-                            {{-- {{ request()->routeIs('inicio') ? 'text-white dark:text-white hover:text-gray-200' : '' }}" --}}
+                            {{ request()->routeIs('inicio') ? 'text-white dark:text-white hover:text-gray-200' : '' }}"
                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                 viewBox="0 0 22 21">
                                 <path
@@ -166,15 +166,8 @@
                             <a
                             href="{{ route('pedidos.entregas') }}"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700
-                                {{ request()->routeIs('pedidos.entregas*') ? 'bg-blue-400 text-white hover:bg-blue-500 dark:hover:bg-blue-500' : '' }}
+                                {{ request()->routeIs('pedidos.entregas.*') ? 'bg-blue-400 text-white hover:bg-blue-500 dark:hover:bg-blue-500' : '' }}
                                  ">Entregas</a>
-                        </li>
-                        <li>
-                            <a
-                            {{-- href="{{ route('tramites.finalizados') }}" --}}
-                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700
-                                {{-- {{ request()->routeIs('tramites.finalizados') ? 'bg-blue-400 text-white hover:bg-blue-500 dark:hover:bg-blue-500' : '' }} --}}
-                                 ">Finalizados</a>
                         </li>
                     </ul>
                 </li>
@@ -193,12 +186,12 @@
                     </li>
                     <li>
                     <a
-                    {{-- href="{{ route('roles.index') }}" --}}
+                    href="{{ route('inventarios.index') }}"
                         class="hover:text-gray-800 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group
-                        {{-- {{ request()->routeIs('roles.*') ? 'bg-blue-500 text-white hover:bg-blue-600 dark:hover:bg-blue-600' : '' }} --}}
+                        {{ request()->routeIs('inventarios.*') ? 'bg-blue-500 text-white hover:bg-blue-600 dark:hover:bg-blue-600' : '' }}
                          ">
                          <svg class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white
-                        {{-- {{ request()->routeIs('roles.*') ? 'text-white dark:text-white hover:text-gray-200' : '' }} --}}
+                        {{ request()->routeIs('inventarios.*') ? 'text-white dark:text-white hover:text-gray-200' : '' }}
                          " xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g fill="none" fill-rule="evenodd"><path d="m12.594 23.258l-.012.002l-.071.035l-.02.004l-.014-.004l-.071-.036q-.016-.004-.024.006l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.016-.018m.264-.113l-.014.002l-.184.093l-.01.01l-.003.011l.018.43l.005.012l.008.008l.201.092q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.003-.011l.018-.43l-.003-.012l-.01-.01z"/><path fill="currentColor" fill-rule="nonzero" d="M9 15v-1h1v1z"/><path fill="currentColor" d="M18 2a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm-7.5 10h-2A1.5 1.5 0 0 0 7 13.5v2A1.5 1.5 0 0 0 8.5 17h2a1.5 1.5 0 0 0 1.5-1.5v-2a1.5 1.5 0 0 0-1.5-1.5m5.5 1.5h-2a1 1 0 0 0-.117 1.993L14 15.5h2a1 1 0 0 0 .117-1.993zm-5.866-6.737L8.72 8.177l-.354-.354a1 1 0 1 0-1.414 1.414l.884.884a1.25 1.25 0 0 0 1.768 0l1.944-1.944a1 1 0 0 0-1.414-1.414M16 8h-2a1 1 0 0 0-.117 1.993L14 10h2a1 1 0 0 0 .117-1.993z"/></g></svg>
 
                         <span class="flex-1 ms-3 whitespace-nowrap">Inventarios</span>
