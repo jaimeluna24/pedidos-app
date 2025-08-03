@@ -73,7 +73,7 @@
                                 class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ $item->numero_pedido }}
                             </th>
-                            <td scope="row" class="px-4 py-2  whitespace-nowrap">
+                            <td scope="row" class="px-4 py-2 ">
                                 {{ $item->proveedor->nombre_proveedor }}
                             </td>
                             <td scope="row" class="px-4 py-2  whitespace-nowrap">

@@ -59,10 +59,10 @@
                                 <th scope="col" class="px-6 py-3">
                                     Precio Unitario
                                 </th>
-                                <th scope="col" class="px-6 py-3">
+                                <th scope="col" class="px-4 py-3">
                                     Cant. Pedida
                                 </th>
-                                <th scope="col" class="px-6 py-3">
+                                <th scope="col" class="px-8 py-3">
                                     Monto
                                 </th>
                                 <th scope="col" class="px-6 py-3">
@@ -78,7 +78,7 @@
                                 <tr
                                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <th scope="row"
-                                        class="px-6 py-1 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        class="px-6 py-1 font-medium text-gray-900 dark:text-white">
                                         {{ $item->producto->nombre_producto }}
                                     </th>
                                     <td class="px-6 py-1">
@@ -87,10 +87,10 @@
                                     <td class="px-6 py-1">
                                         L. {{ $item->precio_unitario }}
                                     </td>
-                                    <td class="px-6 py-1">
+                                    <td class="px-4 py-1">
                                         {{ $item->cantidad }}
                                     </td>
-                                    <td class="px-6 py-1">
+                                    <td class="px-6 py-1  whitespace-nowrap">
                                         L. {{ $item->subtotal }}
                                     </td>
                                     <td class="px-6 py-1">
@@ -156,7 +156,7 @@
                                 <tr
                                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <th scope="row"
-                                        class="px-6 py-1 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        class="px-6 py-1 font-medium text-gray-900 dark:text-white">
                                         {{ $item['nombre_producto'] }}
                                     </th>
                                     <td class="px-6 py-1">

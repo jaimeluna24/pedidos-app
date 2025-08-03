@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Pedidos;
 
+use App\Models\Inventario\Inventario;
+use App\Models\Inventario\MovimientoInventario;
 use App\Models\Pedido\DetallePedido;
 use App\Models\Pedido\Pedido;
 use App\Models\Pedido\DetalleEntrega;
@@ -151,7 +153,7 @@ class AddProductosEntrega extends Component
 
      public function crear()
     {
-        // try {
+        try {
             $pedidoEntrega = PedidoEntrega::create([
                 'pedido_id' => $this->pedido->id,
                 'num_factura' => $this->factura,
@@ -165,24 +167,37 @@ class AddProductosEntrega extends Component
             ]);
 
             foreach ($this->resumenPedido as $item) {
-                DetalleEntrega::create([
+                $detalle = DetalleEntrega::create([
                     'pedido_entrega_id' => $pedidoEntrega->id,
                     'producto_id' => $item['producto_agregar_id'],
                     'cantidad_recibida' => $item['cantidad'],
                     'precio_unitario' => $item['precio_unitario'],
                     'subtotal' => $item['subtotal'],
                 ]);
+
+                $inventario = Inventario::where('producto_id', $detalle->producto_id)->first();
+
+                MovimientoInventario::create([
+                    'inventario_id' => $inventario->id,
+                    'tipo_movimiento' => 'Ingreso',
+                    'cantidad' => $detalle->cantidad_recibida,
+                    'entrega_id' => $pedidoEntrega->id,
+                     'usuario_id' => $this->usuario_id
+                ]);
+
+                $inventario->update([
+                    'fecha_ultimo_ingreso' => now(),
+                    'cantidad_actual' => $inventario->cantidad_actual + $detalle->cantidad_recibida
+                ]);
             }
-
-
 
             session()->flash('success', 'Entrega creado exitosamente');
             return redirect()->route('pedidos.entregas');
-        // } catch (ValidationException $e) {
-        //     session()->flash('error', 'Error de validación. Verifica los campos.');
-        // } catch (\Exception $e) {
-        //     Log::error('Error al crear la entrega: ' . $e->getMessage());
-        //     session()->flash('error', 'Ocurrió un error inesperado al crear la entrega.');
-        // }
+        } catch (ValidationException $e) {
+            session()->flash('error', 'Error de validación. Verifica los campos.');
+        } catch (\Exception $e) {
+            Log::error('Error al crear la entrega: ' . $e->getMessage());
+            session()->flash('error', 'Ocurrió un error inesperado al crear la entrega.');
+        }
     }
 }

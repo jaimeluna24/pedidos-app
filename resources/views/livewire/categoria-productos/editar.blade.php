@@ -7,7 +7,7 @@
          <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-800 w-2/5">
              <!-- Modal body -->
              <div class="mb-6 p-5">
-                 <h3 class="text-lg font-bold mb-6 text-md text-gray-900 dark:text-white">Editar Pol</h3>
+                 <h3 class="text-lg font-bold mb-6 text-md text-gray-900 dark:text-white">Editar Rol</h3>
                  <div class="mb-4">
                      <label for="first_name" class="block mb-2 text-md font-medium text-gray-900 dark:text-white">
                          Nombre de Categoría</label>

@@ -22,6 +22,7 @@ use App\Livewire\Pedidos\CrearEntregas as PedidosEntregasCrear;
 use App\Livewire\Pedidos\AddProductosEntrega as PedidosAddProductosEntregas;
 use App\Livewire\Pedidos\DetallesEntrega as PedidosDetallesEntregas;
 use App\Livewire\Inventarios\Index as InventariosIndex;
+use App\Livewire\Inventarios\Detalles as InventariosDetalles;
 
 Route::get('/', function () {
     return redirect()->route('home');
@@ -66,6 +67,8 @@ Route::get('/pedidos/entregas/detalles/{id}', PedidosDetallesEntregas::class)->n
 
 // Inventario
 Route::get('/Inventarios', InventariosIndex::class)->name('inventarios.index');
+Route::get('/Inventarios/detalles/{id}', InventariosDetalles::class)->name('inventarios.detalles');
+
 
 
 });

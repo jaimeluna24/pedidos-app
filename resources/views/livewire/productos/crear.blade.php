@@ -57,6 +57,9 @@
                     <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
                 @enderror
             </div>
+
+        </div>
+        <div class="grid gap-6 mb-6 md:grid-cols-3 p-4">
             <div>
                 <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Categoría de
                     Producto</label>
@@ -72,6 +75,7 @@
                     <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
                 @enderror
             </div>
+
             <div>
                 <label for="countries"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Proveedor</label>
@@ -87,9 +91,7 @@
                     <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
                 @enderror
             </div>
-        </div>
-        <div class="grid gap-6 mb-6 md:grid-cols-3 p-4">
-            <div>
+             <div>
                 <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Unidad de
                     Medida</label>
                 <select id="countries" wire:model="unidad_medida_id"
@@ -104,6 +106,8 @@
                     <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
                 @enderror
             </div>
+        </div>
+        <div class="grid gap-6 mb-6 md:grid-cols-4 p-4">
             <div>
                 <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">UXC</label>
                 <input wire:model="uxc" type="number" id="first_name"
@@ -114,16 +118,34 @@
                 @enderror
             </div>
             <div>
-                    <label for="first_name"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Precio Total</label>
-                        <div class="relative">
-                            <span
-                                class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500 dark:text-gray-300">L.</span>
-                            <input wire:model.live="total_isv" type="number" id="first_name"
-                                class="pl-8 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="0.00" required autocomplete="off" step="0.01" />
-                        </div>
+                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Precio
+                    Total</label>
+                <div class="relative">
+                    <span
+                        class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500 dark:text-gray-300">L.</span>
+                    <input wire:model.live="total_isv" type="number" id="first_name"
+                        class="pl-8 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="0.00" required autocomplete="off" step="0.01" />
+                </div>
                 @error('total_isv')
+                    <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+            <div>
+                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cantidad Existente</label>
+                <input wire:model="cantidad_actual" type="number" id="first_name"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="4" required minlength="1" min="0" autocomplete="off" />
+                @error('cantidad_actual')
+                    <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+            <div>
+                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cantidad Mínima</label>
+                <input wire:model="cantidad_minima" type="number" id="first_name"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="4" required minlength="1" min="0" autocomplete="off" />
+                @error('cantidad_minima')
                     <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
                 @enderror
             </div>
@@ -168,7 +190,8 @@
 
                     <div>
                         <label for="first_name"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Precio sin Impuesto</label>
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Precio sin
+                            Impuesto</label>
                         <div class="relative">
                             <span
                                 class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500 dark:text-gray-300">L.</span>
@@ -182,6 +205,14 @@
                     </div>
                 </div>
             @endif
+
+
+            {{-- <div class="flex items-center justify-end mb-2">
+                <input id="link-checkbox" type="checkbox" value="" wire:model="add_inventario"
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="link-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Crear Inventario Para Producto</label>
+            </div> --}}
+
 
 
         </div>

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('producto_id')->constrained('productos');
             $table->decimal('cantidad_actual', 8, 2);
-            $table->decimal('cantodad_minima');
+            $table->decimal('cantidad_minima');
             $table->dateTime('fecha_ultimo_ingreso')->nullable();
             $table->dateTime('fecha_ultimo_egreso')->nullable();
             $table->softDeletes();

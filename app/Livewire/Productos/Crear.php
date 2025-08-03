@@ -11,6 +11,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Inventario\Inventario;
 
 class Crear extends Component
 {
@@ -26,6 +27,9 @@ class Crear extends Component
     public $categoria_producto_id = 'Seleccione';
     public $proveedor_id = 'Seleccione';
     public $unidad_medida_id = 'Seleccione';
+
+    public $cantidad_actual = 0;
+    public $cantidad_minima = 0;
 
     public function updated($property)
     {
@@ -57,35 +61,42 @@ class Crear extends Component
     public function crear()
     {
         try {
-        $this->categoria_producto_id = ((int) $this->categoria_producto_id);
-        $this->proveedor_id = ((int) $this->proveedor_id);
-        $this->unidad_medida_id = ((int) $this->unidad_medida_id);
+            $this->categoria_producto_id = ((int) $this->categoria_producto_id);
+            $this->proveedor_id = ((int) $this->proveedor_id);
+            $this->unidad_medida_id = ((int) $this->unidad_medida_id);
 
-        $this->validate([
-            'codigo_producto' => 'required|string|max:255|unique:productos,codigo_producto',
-            'nombre_producto' => 'required|string|max:255',
-            'total_isv' => 'required'
-        ]);
+            $this->validate([
+                'codigo_producto' => 'required|string|max:255|unique:productos,codigo_producto',
+                'nombre_producto' => 'required|string|max:255',
+                'total_isv' => 'required',
+                // 'producto_id' => 'integer|unique:inventarios,producto_id'
+            ]);
 
-        Producto::create([
-            'codigo_producto' => $this->codigo_producto,
-            'nombre_producto' => $this->nombre_producto,
-            'uxc' => $this->uxc,
-            'precio_base' => $this->precio_base,
-            'isv' => $this->isv,
-            'precio_isv' => $this->precio_isv,
-            'total_isv' => $this->total_isv,
-            'categoria_producto_id' => $this->categoria_producto_id,
-            'proveedor_id' => $this->proveedor_id,
-            'unidad_medida_id' => $this->unidad_medida_id,
-            'creador_id' => Auth::id()
-        ]);
+            $producto = Producto::create([
+                'codigo_producto' => $this->codigo_producto,
+                'nombre_producto' => $this->nombre_producto,
+                'uxc' => $this->uxc,
+                'precio_base' => $this->precio_base,
+                'isv' => $this->isv,
+                'precio_isv' => $this->precio_isv,
+                'total_isv' => $this->total_isv,
+                'categoria_producto_id' => $this->categoria_producto_id,
+                'proveedor_id' => $this->proveedor_id,
+                'unidad_medida_id' => $this->unidad_medida_id,
+                'creador_id' => Auth::id()
+            ]);
 
-        // $this->reset(['nombre_categoria', 'observacion']);
+                Inventario::create([
+                    'producto_id' => $producto->id,
+                    'cantidad_actual' => $this->cantidad_actual,
+                    'cantidad_minima' => $this->cantidad_minima
+                ]);
 
-        session()->flash('success', 'Producto creado exitosamente.');
+            // $this->reset(['nombre_categoria', 'observacion']);
 
-        return redirect()->route('productos.index');
+            session()->flash('success', 'Producto creado exitosamente.');
+
+            return redirect()->route('productos.index');
         } catch (ValidationException $e) {
             session()->flash('error', 'Error de validación. Verifica los campos.');
         } catch (\Exception $e) {
