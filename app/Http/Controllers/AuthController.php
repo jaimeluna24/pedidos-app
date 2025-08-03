@@ -47,4 +47,14 @@ class AuthController extends Controller
 	    // Si el usuario no existe devolvemos al usuario al formulario de login con un mensaje de error
 	    return redirect("/")->withSuccess('Los datos introducidos no son correctos');
 	}
+
+     public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate(); // Se invalida la sesión
+        $request->session()->regenerateToken(); // Se regenera el CSRF token
+
+        return redirect('/'); // redireccion
+    }
 }

@@ -100,12 +100,12 @@
                                 </p>
                             </div>
                             <ul class="py-1" role="none">
-                                {{-- <li>
-                                    <a href="{{ route('logout') }}"
+                                <li>
+                                    <a href="{{ route('logOut') }}"
                                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                        role="menuitem">Log out</a>
-                                </li> --}}
+                                        role="menuitem">Cerrar Sesión</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -283,11 +283,11 @@
                 </li>
                 <li>
                     <a
-                    {{-- href="{{ route('logout') }}" --}}
-                        {{-- onclick="event.preventDefault(); document.getElementById('logout-form').submit();" --}}
+                    href="{{ route('logOut') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                         class="hover:text-gray-800 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                         <svg class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white
-                        {{-- {{ request()->routeIs('logout.*') ? 'text-white dark:text-white hover:text-gray-200' : '' }} --}}
+                        {{ request()->routeIs('logOut.*') ? 'text-white dark:text-white hover:text-gray-200' : '' }}
                          "
                             xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                             <g fill="currentColor">
@@ -296,11 +296,11 @@
                                     d="m13.842 17.385l1.42-1.408l-3.92-3.953h9.144a1 1 0 1 0 0-2h-9.162l3.98-3.947l-1.408-1.42l-6.391 6.337z" />
                             </g>
                         </svg>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Log Out</span>
+                        <span class="flex-1 ms-3 whitespace-nowrap">Cerrar Sesión</span>
                     </a>
-                    {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                    <form id="logout-form" action="{{ route('logOut') }}" method="POST" class="hidden">
                         @csrf
-                    </form> --}}
+                    </form>
                 </li>
             </ul>
             <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">

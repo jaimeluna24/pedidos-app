@@ -6,6 +6,7 @@ use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Usuario\Usuario;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
@@ -18,7 +19,8 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
         $this->call([
             DepartamentoSeeder::class,
-            CategoriaProductoSeeder::class
+            CategoriaProductoSeeder::class,
+            PermisosSeeder::class,
         ]);
 
         Role::create(['name' => 'Administrador']);
@@ -36,5 +38,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $usuario->assignRole('Administrador');
+        $usuario->syncPermissions(Permission::all());
     }
 }

@@ -31,6 +31,8 @@ Route::get('/', function () {
 Route::get('/home', [AuthController::class, 'index'])->name('home');
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/loginv', [AuthController::class, 'loginUser'])->name('loginUser');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logOut');
+
 
 Route::middleware('auth')->group(function () {
 Route::get('/inicio', Dashboard::class)->name('inicio');
