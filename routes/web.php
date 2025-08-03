@@ -9,6 +9,8 @@ use App\Livewire\Usuarios\Index as UsuariosIndex;
 use App\Livewire\Usuarios\Crear as UsuariosCrear;
 use App\Livewire\Usuarios\Detalles as UsuariosDetalles;
 use App\Livewire\CategoriaProductos\Index as CategoriaIndex;
+use App\Livewire\Proveedor\Index as ProveedorIndex;
+use app\Livewire\Departamento\Index as DepartamentoIndex;
 use App\Livewire\Productos\Index as ProductosIndex;
 use App\Livewire\Productos\Crear as ProductosCrear;
 use App\Livewire\Productos\Detalles as ProductosDetalles;
@@ -35,12 +37,12 @@ Route::get('/permisos', PermisosIndex::class)->name('seguridad.permisos.index');
 Route::get('/usuarios', UsuariosIndex::class)->name('usuarios.index');
 Route::get('/usuarios/crear', UsuariosCrear::class)->name('usuarios.crear');
 Route::get('/usuarios/detalles/{id}', UsuariosDetalles::class)->name('usuarios.detalles');
+Route::get('/proveedor/', ProveedorIndex::class)->name('proveedores.index');
 
 
 // Mantenimiento
 Route::get('/mantenimiento/categoria-productos', CategoriaIndex::class)->name('mantenimientos.categorias.index');
-
-
+route::get('/mantenimiento/departamentos', DepartamentoIndex::class)->name('mantenimientos.departamentos.index');
 // Productos
 Route::get('/productos', ProductosIndex::class)->name('productos.index');
 Route::get('/productos/crear', ProductosCrear::class)->name('productos.crear');
