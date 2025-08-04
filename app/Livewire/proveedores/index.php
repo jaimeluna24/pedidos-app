@@ -5,8 +5,11 @@ namespace App\Livewire\proveedores;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Proveedor\Proveedor;
+use App\Models\Proveedor\TipoAdjudicacion;
+use App\Models\Proveedor\TipoProveedor;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 class Index extends Component
@@ -17,20 +20,29 @@ class Index extends Component
     public $nombre_proveedor;
     public $telefono;
     public $numero_adjudicacion;
-    public $tipo_adjudicacion_id;
-    public $tipo_proveedor_id;
+    public $tipo_adjudicacion_id = 'Seleccione';
+    public $tipo_proveedor_id = 'Seleccione';
     public $creador_id;
 
+    public $query = '';
+
     public $modal = false;
+
     public function render()
     {
-        $proveedor = Proveedor::where('nombre_proveedor', 'like', '%' . $this->query . '%')->paginate(10);
-        return view('livewire.proveedor.index', ['Proveedor' => $proveedor]);
+        $tipo_adjudicaciones = TipoAdjudicacion::all();
+        $tipo_proveedores = TipoProveedor::all();
+        $proveedores = Proveedor::where('nombre_proveedor', 'like', '%' . $this->query . '%')->paginate(10);
+        return view('livewire.proveedores.index', ['proveedores' => $proveedores, 'tipo_adjudicaciones' => $tipo_adjudicaciones, 'tipo_proveedores' => $tipo_proveedores]);
     }
 
      public function crear()
     {
-        try {
+        // try {
+            $this->tipo_proveedor_id =  ((int) $this->tipo_proveedor_id);
+            $this->tipo_adjudicacion_id =  ((int) $this->tipo_adjudicacion_id);
+
+
             $this->validate([
                 'nombre_proveedor' => 'required|string|max:255|unique:proveedores,nombre_proveedor',
             ]);
@@ -42,24 +54,22 @@ class Index extends Component
                 'numero_adjudicacion' => $this->numero_adjudicacion,
                 'tipo_adjudicacion_id' => $this->tipo_adjudicacion_id,
                 'tipo_proveedor_id' => $this->tipo_proveedor_id,
-                'creador_id' => $this->creador_id,
+                'creador_id' => Auth::id()
             ]);
             $this->reset(['rtn', 'nombre_proveedor', 'telefono', 'numero_adjudicacion', 'tipo_adjudicacion_id', 'tipo_proveedor_id', 'creador_id']);
 
             session()->flash('success', 'Proveedor creado exitosamente.');
             $this->dispatch('cerrar-modal');
 
-            return redirect()->route('mantenimientos.proveedores.index');
-        }
-
-        catch (ValidationException $e) {
-            session()->flash('error', 'Error de validación. Verifica los campos.');
-        } catch (ValidationException $e) {
-            session()->flash('error', 'Error de validación. Verifica los campos.');
-        } catch (\Exception $e) {
-            Log::error('Error al crear proveedor: ' . $e->getMessage());
-            session()->flash('error', 'Ocurrió un error inesperado al crear proveedor.');
-        }
+            return redirect()->route('proveedor.index');
+        // } catch (ValidationException $e) {
+        //     session()->flash('error', 'Error de validación. Verifica los campos.');
+        // } catch (ValidationException $e) {
+        //     session()->flash('error', 'Error de validación. Verifica los campos.');
+        // } catch (\Exception $e) {
+        //     Log::error('Error al crear proveedor: ' . $e->getMessage());
+        //     session()->flash('error', 'Ocurrió un error inesperado al crear proveedor.');
+        // }
 
     }
 
@@ -99,7 +109,6 @@ class Index extends Component
                 'numero_adjudicacion' => $this->numero_adjudicacion,
                 'tipo_adjudicacion_id' => $this->tipo_adjudicacion_id,
                 'tipo_proveedor_id' => $this->tipo_proveedor_id,
-                'creador_id' => $this->creador_id,
             ]);
 
             $this->reset(['rtn', 'nombre_proveedor', 'telefono', 'numero_adjudicacion', 'tipo_adjudicacion_id', 'tipo_proveedor_id', 'creador_id']);

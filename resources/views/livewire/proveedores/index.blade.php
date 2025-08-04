@@ -6,7 +6,7 @@
         <div class="flex flex-column sm:flex-row flex-wrap space-y-1 sm:space-y-0 items-center justify-between ">
             <div class="flex items-center gap-8">
                 <div class="text-2xl font-semibold text-gray-900 dark:text-white">
-                    proveedores
+                    Proveedores
                 </div>
             </div>
             <div class="flex justify-between gap-4 w-full md:w-1/2">
