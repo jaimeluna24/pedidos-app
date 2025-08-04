@@ -43,7 +43,22 @@
                             #
                         </th>
                         <th scope="col" class="px-6 py-3">
+                            RTN
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             Nombre de proveedores
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            telefono
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Numero Adjudicación
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Tipo Ajudi. ID
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Tipo proveedor ID
                         </th>
                         <th scope="col" class="px-6 py-3 hidden md:table-cell">
                             Fecha
@@ -63,7 +78,27 @@
                             </th>
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ $item->rtn }}
+                            </th>
+                            <th scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ $item->nombre_proveedor }}
+                            </th>
+                            <th scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ $item->telefono }}
+                            </th>
+                            <th scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ $item->numero_adjudicacion }}
+                            </th>
+                            <th scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ $item->tipo_adjudicacion_id }}
+                            </th>
+                            <th scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ $item->tipo_proveedor_id }}
                             </th>
                             <td class="px-6 py-4 hidden md:table-cell">
                                 {{ $item->created_at }}

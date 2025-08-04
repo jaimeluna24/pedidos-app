@@ -13,10 +13,32 @@ class DepartamentoSeeder extends Seeder
      */
     public function run(): void
     {
-        Departamento::create([
-            'nombre_departamento' => 'Departamento A',
-            'siglas' => 'DA',
+        Departamento::create(
+            [
+            [
+            'nombre_departamento' => 'Almacen',
+            'siglas' => 'ALM',
             'observacion' => 'N/A'
-        ]);
+            ],
+            [
+            'nombre_departamento' => 'Contabilidad',
+            'siglas' => 'CON',
+            'observacion' => 'N/A'      
+            ],
+            [
+            'nombre_departamento' => 'Administración',
+            'siglas' => 'ADM',
+            'observacion' => 'N/A'
+            ],
+            [
+            'nombre_departamento' => 'Finanzas',
+            'siglas' => 'FIN',
+            'observacion' => 'N/A'
+            ],
+            [
+            'nombre_departamento' => 'Logística',
+            'siglas' => 'LOG',
+            'observacion' => 'N/A'
+            ]]);
     }
 }
