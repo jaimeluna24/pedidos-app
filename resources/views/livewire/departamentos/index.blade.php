@@ -43,6 +43,9 @@
                             #
                         </th>
                         <th scope="col" class="px-6 py-3">
+                            siglas
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             Nombre de departamento
                         </th>
                         <th scope="col" class="px-6 py-3 hidden md:table-cell">
@@ -50,7 +53,7 @@
                         </th>
                         <th scope="col" class="px-6 py-3">
                             <span class="sr-only">Edit</span>
-                            Acción
+                            Observación
                         </th>
                     </tr>
                 </thead>
@@ -61,12 +64,18 @@
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ $index+1 }}
                             </th>
+                            <td class="px-6 py-4 hidden md:table-cell">
+                                {{ $item->siglas }}
+                            </td>
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ $item->nombre_departamento }}
                             </th>
                             <td class="px-6 py-4 hidden md:table-cell">
                                 {{ $item->created_at }}
+                            </td>
+                            <td class="px-6 py-4 hidden md:table-cell">
+                                {{ $item->observacion }}
                             </td>
                             <td class="px-6 py-4 text-right">
 
