@@ -29,6 +29,7 @@ class Index extends Component
         try {
             $this->validate([
                 'nombre_departamento' => 'required|string|max:255|unique:departamentos,nombre_departamento',
+                'siglas' => 'required|string|max:255|unique:departamentos,siglas',
             ]);
 
             Departamento::create([

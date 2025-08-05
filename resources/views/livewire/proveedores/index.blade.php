@@ -67,6 +67,7 @@
                             <span class="sr-only">Edit</span>
                             Acción
                         </th>
+                        
                     </tr>
                 </thead>
                 <tbody>

@@ -55,6 +55,10 @@
                             <span class="sr-only">Edit</span>
                             Observación
                         </th>
+                        <th scope="col" class="px-6 py-3">
+                            <span class="sr-only">Edit</span>
+                            Acción
+                        </th>
                     </tr>
                 </thead>
                 <tbody>

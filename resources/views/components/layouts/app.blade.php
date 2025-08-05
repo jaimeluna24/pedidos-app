@@ -96,7 +96,7 @@
                                     {{ auth()->user()->departamento->nombre_departamento }}
                                 </p>
                                 <p class="text-sm mb-2 font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                                   Eres: {{ auth()->user()->getRoleNames()->first(); }}
+                                   {{ auth()->user()->getRoleNames()->first() }}
                                 </p>
                             </div>
                             <ul class="py-1" role="none">

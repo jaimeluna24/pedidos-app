@@ -14,14 +14,14 @@ class TipoProveedorSeeder extends Seeder
     public function run(): void
     {
         TipoProveedor::create([
-            [
                 'nombre_tipo_proveedor' => 'Proveedor Nacional',
-                'observacion' => 'Proveedor ubicado dentro del país.',
-            ],
-            [
-                'nombre_tipo_adjudicacion' => 'Proveedor Internacional',
+                'observacion' => 'Proveedor ubicado dentro del país.',  
+        ]);
+        TipoProveedor::create([
+                'nombre_tipo_proveedor' => 'Proveedor Internacional',
                 'observacion' => 'Proveedor ubicado fuera del país.',
-            ]
         ]);
     }
 }
+
+

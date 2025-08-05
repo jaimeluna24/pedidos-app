@@ -11,6 +11,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class Index extends Component
 {
@@ -20,11 +21,12 @@ class Index extends Component
     public $nombre_proveedor;
     public $telefono;
     public $numero_adjudicacion;
-    public $tipo_adjudicacion_id = 'Seleccione';
-    public $tipo_proveedor_id = 'Seleccione';
+    public $tipo_adjudicacion_id= '';
+    public $tipo_proveedor_id= '';
     public $creador_id;
 
     public $query = '';
+    public $modo_vista = false;
 
     public $modal = false;
 
@@ -38,13 +40,18 @@ class Index extends Component
 
      public function crear()
     {
-        // try {
-            $this->tipo_proveedor_id =  ((int) $this->tipo_proveedor_id);
+        try {
+            $this->tipo_proveedor_id = ((int) $this->tipo_proveedor_id);
             $this->tipo_adjudicacion_id =  ((int) $this->tipo_adjudicacion_id);
 
 
             $this->validate([
+                'rtn' => 'required|string|max:255|unique:proveedores,rtn',
                 'nombre_proveedor' => 'required|string|max:255|unique:proveedores,nombre_proveedor',
+                'telefono' => 'required|string|max:255|unique:proveedores,telefono',
+                'numero_adjudicacion' => 'required|string|max:255|unique:proveedores,numero_adjudicacion',
+                'tipo_adjudicacion_id' => 'required|integer|exists:tipo_adjudicaciones,id',
+                'tipo_proveedor_id' => 'required|integer|exists:tipo_proveedores,id'
             ]);
 
             Proveedor::create([
@@ -62,14 +69,14 @@ class Index extends Component
             $this->dispatch('cerrar-modal');
 
             return redirect()->route('proveedor.index');
-        // } catch (ValidationException $e) {
-        //     session()->flash('error', 'Error de validación. Verifica los campos.');
-        // } catch (ValidationException $e) {
-        //     session()->flash('error', 'Error de validación. Verifica los campos.');
-        // } catch (\Exception $e) {
-        //     Log::error('Error al crear proveedor: ' . $e->getMessage());
-        //     session()->flash('error', 'Ocurrió un error inesperado al crear proveedor.');
-        // }
+        } catch (ValidationException $e) {
+            session()->flash('error', 'Error de validación. Verifica los campos.');
+        } catch (ValidationException $e) {
+            session()->flash('error', 'Error de validación. Verifica los campos.');
+        } catch (\Exception $e) {
+            Log::error('Error al crear proveedor: ' . $e->getMessage());
+            session()->flash('error', 'Ocurrió un error inesperado al crear proveedor.');
+        }
 
     }
 
@@ -95,11 +102,36 @@ class Index extends Component
     {
         try {
             $this->validate([
+                'rtn' => [
+                    'required',
+                    'string',
+                    Rule::unique('proveedores', 'rtn')->ignore($this->proveedor->id),
+                ],
                 'nombre_proveedor' => [
                     'required',
                     'string',
-                    Rule::unique('proveedores', 'nombre_proveedor')->ignore($this->proveedor->id),
+                    Rule::unique('proveedores', 'nombre_proveedor')->ignore($this->proveedor->id),    
                 ],
+                'telefono' => [
+                    'required',
+                    'string',
+                    Rule::unique('proveedores', 'telefono')->ignore($this->proveedor->id),
+                ],
+                'numero_adjudicacion' => [
+                    'required',
+                    'string',
+                    Rule::unique('proveedores', 'numero_adjudicacion')->ignore($this->proveedor->id),
+                ],
+                'tipo_adjudicacion_id' => [
+                    'required',
+                    'integer',
+                    'exists:tipo_adjudicaciones,id',
+                ],
+                'tipo_proveedor_id' => [
+                    'required',
+                    'integer',
+                    'exists:tipo_proveedores,id',
+                ]
             ]);
 
             $this->proveedor->update([

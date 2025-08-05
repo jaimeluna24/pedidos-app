@@ -13,7 +13,7 @@ class TipoAdjudicacionSeeder extends Seeder
      */
     public function run(): void
     {
-        TipoAdjudicacion::create([
+        TipoAdjudicacion::insert([
             [
                 'nombre_tipo_adjudicacion' => 'Adjudicación Directa',
                 'observacion' => 'Proceso de adjudicación sin licitación previa.',
