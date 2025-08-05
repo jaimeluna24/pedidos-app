@@ -49,7 +49,7 @@ class Index extends Component
                 'rtn' => 'required|string|max:255|unique:proveedores,rtn',
                 'nombre_proveedor' => 'required|string|max:255|unique:proveedores,nombre_proveedor',
                 'telefono' => 'required|string|max:255|unique:proveedores,telefono',
-                'numero_adjudicacion' => 'required|string|max:255|unique:proveedores,numero_adjudicacion',
+                'numero_adjudicacion' => 'required|string|max:255|',
                 'tipo_adjudicacion_id' => 'required|integer|exists:tipo_adjudicaciones,id',
                 'tipo_proveedor_id' => 'required|integer|exists:tipo_proveedores,id'
             ]);
