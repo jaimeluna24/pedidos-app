@@ -17,68 +17,68 @@
     </div>
 
     <div action="">
-        @if ($productosDisponibles->isEmpty())
-            <div class="flex justify-center gap-8 border-b">
-                <div class="text-2xl font-semibold text-gray-900 dark:text-white mb-10 mt-10">
-                    Todos los productos ya han sido seleccionados
-                </div>
-            </div>
-        @else
-            <div class="p-4">
-                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                    <div
-                        class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
-                        <div class="text-2xl font-semibold text-gray-900 dark:text-white">
-                            Seleccione
-                        </div>
-                        <label for="table-search" class="sr-only">Search</label>
-                        <div class="relative">
-                            <div
-                                class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">
-                                <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                    fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                            </div>
-                            <input type="text" id="table-search" wire:model.live="query"
-                                class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Buscar por Nombre de Producto">
-                        </div>
+
+        <div class="p-4">
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <div
+                    class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
+                    <div class="text-2xl font-semibold text-gray-900 dark:text-white">
+                        Seleccione
                     </div>
-                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                            <tr>
-                                <th scope="col" class="px-6 py-3">
-                                    Producto
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    UM
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Precio Unitario
-                                </th>
-                                <th scope="col" class="px-4 py-3">
-                                    Cant. Pedida
-                                </th>
-                                <th scope="col" class="px-8 py-3">
-                                    Monto
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Cant. Recibida
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Acción
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <label for="table-search" class="sr-only">Search</label>
+                    <div class="relative">
+                        <div
+                            class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor"
+                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <input type="text" id="table-search" wire:model.live="query"
+                            class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Buscar por Nombre de Producto">
+                    </div>
+                </div>
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Producto
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                UM
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Precio Unitario
+                            </th>
+                            <th scope="col" class="px-4 py-3">
+                                Cant. Pedida
+                            </th>
+                            <th scope="col" class="px-8 py-3">
+                                Monto
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Cant. Recibida
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Acción
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if ($productosDisponibles->isEmpty())
+                            <div class="flex justify-center gap-8 border-b">
+                                <div class="text-2xl font-semibold text-gray-900 dark:text-white mb-10 mt-10">
+                                    Todos los productos ya han sido seleccionados
+                                </div>
+                            </div>
+                        @else
                             @foreach ($productosDisponibles as $item)
                                 <tr
                                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <th scope="row"
-                                        class="px-6 py-1 font-medium text-gray-900 dark:text-white">
+                                    <th scope="row" class="px-6 py-1 font-medium text-gray-900 dark:text-white">
                                         {{ $item->producto->nombre_producto }}
                                     </th>
                                     <td class="px-6 py-1">
@@ -111,11 +111,12 @@
                                     </td>
                                 </tr>
                             @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                        @endif
+
+                    </tbody>
+                </table>
             </div>
-        @endif
+        </div>
 
 
         @if ($resumenPedido)
@@ -155,8 +156,7 @@
                             @foreach ($resumenPedido as $item)
                                 <tr
                                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <th scope="row"
-                                        class="px-6 py-1 font-medium text-gray-900 dark:text-white">
+                                    <th scope="row" class="px-6 py-1 font-medium text-gray-900 dark:text-white">
                                         {{ $item['nombre_producto'] }}
                                     </th>
                                     <td class="px-6 py-1">

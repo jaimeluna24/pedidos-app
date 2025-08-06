@@ -47,10 +47,22 @@ class AddProducto extends Component
         $this->buscarProductos();
     }
 
+    // public function buscarProductos()
+    // {
+    //     $this->productosDisponibles = Producto::where('nombre_producto', 'like', '%' . $this->query . '%')
+    //         ->where('proveedor_id', $this->proveedor_id)
+    //         ->whereInNot('nombre_producto', $this->resumenPedido['nombre_producto'])
+    //         ->get();
+    // }
+
     public function buscarProductos()
     {
+        // Extraer solo los nombres de productos del resumen
+        $nombresYaAgregados = collect($this->resumenPedido)->pluck('nombre_producto')->toArray();
+
         $this->productosDisponibles = Producto::where('nombre_producto', 'like', '%' . $this->query . '%')
             ->where('proveedor_id', $this->proveedor_id)
+            ->whereNotIn('nombre_producto', $nombresYaAgregados)
             ->get();
     }
 
@@ -75,6 +87,9 @@ class AddProducto extends Component
             'precio_unitario' => $producto->total_isv,
             'subtotal' => $this->productoCantidad[$productoId] * $producto->total_isv,
         ];
+
+        $this->query ='';
+        $this->buscarProductos();
 
         $this->productosDisponibles = $this->productosDisponibles->filter(fn($p) => $p->id !== $productoId);
 

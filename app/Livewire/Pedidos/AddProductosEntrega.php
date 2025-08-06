@@ -62,13 +62,18 @@ class AddProductosEntrega extends Component
 
     public function buscarProductos()
     {
-         $detalle_pedidos = DetallePedido::where('pedido_id', $this->pedido->id)
+        $nombresYaAgregados = collect($this->resumenPedido)->pluck('nombre_producto')->toArray();
+
+        $detalle_pedidos = DetallePedido::where('pedido_id', $this->pedido->id)
             ->whereHas('producto', function ($query) {
                 $query->where('nombre_producto', 'like', '%' . $this->query . '%');
             })
             ->with('producto')
             ->get();
-        $this->productosDisponibles = $detalle_pedidos;
+        // Filtrar en memoria los productos ya agregados
+        $this->productosDisponibles = $detalle_pedidos->filter(function ($detalle) use ($nombresYaAgregados) {
+            return !in_array($detalle->producto->nombre_producto, $nombresYaAgregados);
+        })->values();
         // dd($this->productosDisponibles);
     }
 
@@ -77,7 +82,7 @@ class AddProductosEntrega extends Component
         return view('livewire.pedidos.add-productos-entrega');
     }
 
-     public function agregarProducto($productoId)
+    public function agregarProducto($productoId)
     {
         $producto = $this->productosDisponibles->find($productoId);
 
@@ -94,6 +99,9 @@ class AddProductosEntrega extends Component
             'precio_unitario' => $producto->producto->total_isv,
             'subtotal' => $this->productoCantidad[$productoId] * $producto->producto->total_isv,
         ];
+
+        $this->query = '';
+        $this->buscarProductos();
 
         $this->productosDisponibles = $this->productosDisponibles->filter(fn($p) => $p->id !== $productoId);
 
@@ -151,7 +159,7 @@ class AddProductosEntrega extends Component
         $this->modo_edicion_id = null;
     }
 
-     public function crear()
+    public function crear()
     {
         try {
             $pedidoEntrega = PedidoEntrega::create([
@@ -182,7 +190,7 @@ class AddProductosEntrega extends Component
                     'tipo_movimiento' => 'Ingreso',
                     'cantidad' => $detalle->cantidad_recibida,
                     'entrega_id' => $pedidoEntrega->id,
-                     'usuario_id' => $this->usuario_id
+                    'usuario_id' => $this->usuario_id
                 ]);
 
                 $inventario->update([

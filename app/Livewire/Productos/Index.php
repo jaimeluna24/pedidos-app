@@ -20,7 +20,8 @@ class Index extends Component
                     $q->where('nombre_proveedor', 'like', '%' . $this->query . '%');
                 });
         })
-            ->paginate(10);
+        ->orderBy('nombre_producto', 'asc')
+            ->paginate(35);
         return view('livewire.productos.index', ['productos' => $productos]);
     }
 }
