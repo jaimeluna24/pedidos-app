@@ -21,8 +21,8 @@ class Index extends Component
     public $nombre_proveedor;
     public $telefono;
     public $numero_adjudicacion;
-    public $tipo_adjudicacion_id= '';
-    public $tipo_proveedor_id= '';
+    public $tipo_adjudicacion_id= 'Seleccione';
+    public $tipo_proveedor_id= 'Seleccione';
     public $creador_id;
 
     public $query = '';
@@ -83,6 +83,7 @@ class Index extends Component
     public function abrirEditar($id)
     {
         $proveedor = Proveedor::find($id);
+        $this->proveedor = $proveedor;
         $this->rtn = $proveedor->rtn;
         $this->nombre_proveedor = $proveedor->nombre_proveedor;
         $this->telefono = $proveedor->telefono;
@@ -110,7 +111,7 @@ class Index extends Component
                 'nombre_proveedor' => [
                     'required',
                     'string',
-                    Rule::unique('proveedores', 'nombre_proveedor')->ignore($this->proveedor->id),    
+                    Rule::unique('proveedores', 'nombre_proveedor')->ignore($this->proveedor->id),
                 ],
                 'telefono' => [
                     'required',

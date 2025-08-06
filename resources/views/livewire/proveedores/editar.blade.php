@@ -1,7 +1,6 @@
 <div id="modal-editar-detalle" tabindex="-1" aria-hidden="true"
      class="bg-opacity-60 bg-black overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
      <div class="relative p-4 w-full h-full flex justify-center items-center">
-
          <!-- Modal content -->
          <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-800 w-2/5">
              <!-- Modal body -->
@@ -9,7 +8,7 @@
                  <h3 class="text-lg font-bold mb-6 text-md text-gray-900 dark:text-white">Editar proveedor</h3>
                 <div class="mb-4">
                      <label for="first_name" class="block mb-2 text-md font-medium text-gray-900 dark:text-white">
-                         editar RTN</label>
+                         Editar RTN</label>
                      <input type="text" id="first_name" wire:model="rtn" value="{{ $rtn }}"
                          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                          placeholder="" required />
@@ -20,7 +19,7 @@
 
                  <div class="mb-4">
                      <label for="first_name" class="block mb-2 text-md font-medium text-gray-900 dark:text-white">
-                        editar RTN</label>
+                        Editar RTN</label>
                      <input type="text" id="first_name" wire:model="nombre_proveedor" value="{{ $nombre_proveedor }}"
                          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                          placeholder="" required />
@@ -31,7 +30,7 @@
 
                  <div class="mb-4">
                      <label for="first_name" class="block mb-2 text-md font-medium text-gray-900 dark:text-white">
-                        editar telefono</label>
+                        Editar Télefono</label>
                      <input type="text" id="first_name" wire:model="telefono" value="{{ $telefono }}"
                          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                          placeholder="" required />
@@ -42,7 +41,7 @@
 
                  <div class="mb-4">
                      <label for="first_name" class="block mb-2 text-md font-medium text-gray-900 dark:text-white">
-                        numero adjudicacion</label>
+                        Número adjudicación</label>
                      <input type="text" id="first_name" wire:model="numero_adjudicacion" value="{{ $numero_adjudicacion }}"
                          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                          placeholder="" required />
@@ -50,7 +49,7 @@
                      <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
                         @enderror
                  </div>
-                 
+
             <div>
                 <label for="first_name"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -58,19 +57,15 @@
                 </label>
 
                 <select id="tipo_adjudicacion_id" wire:model="tipo_adjudicacion_id"
-                    @disabled($modo_vista ?? false)
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required>
-
                     <option selected disabled>Seleccione</option>
-
-                    @foreach ($proveedores as $item)
+                    @foreach ($tipo_adjudicaciones as $item)
                         <option value="{{ $item->id }}">
-                            {{ $item->tipo_adjudicacion_id }}
+                            {{ $item->nombre_tipo_adjudicacion }}
                         </option>
                     @endforeach
                 </select>
-
                 @error('tipo_adjudicacion_id')
                     <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
                 @enderror
@@ -81,17 +76,13 @@
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                     Tipo de proveedor
                 </label>
-
                 <select id="tipo_proveedor_id" wire:model="tipo_proveedor_id"
-                    @disabled($modo_vista ?? false)
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required>
-
                     <option selected disabled>Seleccione</option>
-
-                    @foreach ($proveedores as $item)
+                    @foreach ($tipo_proveedores as $item)
                         <option value="{{ $item->id }}">
-                            {{ $item->tipo_proveedor_id }}
+                            {{ $item->nombre_tipo_proveedor }}
                         </option>
                     @endforeach
                 </select>
@@ -100,44 +91,6 @@
                     <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
                 @enderror
             </div>
-        
-
-                {{-- <div>
-                    <label for="countries"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">tipo proveedor id</label>
-                    <select id="countries" wire:model="tipo_proveedor_id" value="{{ $tipo_proveedor_id }}"
-                        @disabled($modo_vista)
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        required>
-                        <option selected disabled>Seleccione</option>
-                        @foreach ($tipo_proveedor_id as $item)
-                            <option value="{{ $item->id }}">{{ $item->tipo_proveedor_id}}</option>
-                        @endforeach
-                    </select>
-                    @error('tipo_proveedor_id')
-                        <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
-                    @enderror
-                </div>  --}}
-
-                 {{-- <div>
-                    <label for="countries"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">creador id</label>
-                    <select id="countries" wire:model="creador_id" value="{{ $creador_id }}"
-                        @disabled($modo_vista)
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        required>
-                        <option selected disabled>Seleccione</option>
-                        @foreach ($creador_id as $item)
-                            <option value="{{ $item->id }}">{{ $item->creador_id}}</option>
-                        @endforeach
-                    </select>
-                    @error('creador_id')
-                        <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
-                    @enderror
-                </div>
-                 
-             </div> --}}
-
             </div>
              <!-- Modal footer -->
              <div

@@ -15,11 +15,12 @@ class TipoProveedor extends Model
         'id',
         'nombre_tipo_adjudicacion',
         'observacion',
-        
+
     ];
+
     public function proveedor()
     {
-        return $this->belongsTo(Proveedor::class, 'tipo_proveedor_id');
+        return $this->hasMany(Proveedor::class, 'tipo_proveedor_id');
     }
 }
 

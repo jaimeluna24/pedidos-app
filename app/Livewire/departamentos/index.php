@@ -34,21 +34,21 @@ class Index extends Component
 
             Departamento::create([
                 'nombre_departamento' => $this->nombre_departamento,
-                'siglas' => strtoupper(substr($this->siglas, 0, 3)),
+                'siglas' => strtoupper($this->siglas),
                 'observacion' => $this->observacion,
             ]);
 
             $this->reset(['nombre_departamento', 'siglas', 'observacion']);
 
-            session()->flash('success', 'departamento creado exitosamente.');
+            session()->flash('success', 'Departamento creado exitosamente.');
             $this->dispatch('cerrar-modal');
 
             return redirect()->route('mantenimientos.departamentos.index');
         } catch (ValidationException $e) {
             session()->flash('error', 'Error de validación. Verifica los campos.');
         } catch (\Exception $e) {
-            Log::error('Error al crear departamento: ' . $e->getMessage());
-            session()->flash('error', 'Ocurrió un error inesperado al crear departamento.');
+            Log::error('Error al crear Departamento: ' . $e->getMessage());
+            session()->flash('error', 'Ocurrió un error inesperado al crear Departamento.');
         }
     }
 
@@ -79,7 +79,7 @@ class Index extends Component
             ]);
 
             $this->Departamento->update([
-                'nombre_categoria' => $this->nombre_departamento,
+                'nombre_departamento' => $this->nombre_departamento,
                 'siglas' => strtoupper(substr($this->siglas, 0, 3)),
                 'observacion' => $this->observacion
             ]);

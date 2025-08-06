@@ -40,43 +40,36 @@
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                            #
-                        </th>
-                        <th scope="col" class="px-6 py-3">
                             RTN
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Nombre de proveedores
                         </th>
-                        <th scope="col" class="px-6 py-3">
-                            telefono
-                        </th>
+                        {{-- <th scope="col" class="px-6 py-3">
+                            Télefono
+                        </th> --}}
                         <th scope="col" class="px-6 py-3">
                             Numero Adjudicación
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Tipo Ajudi. ID
+                            Tipo Ajudicación
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Tipo proveedor ID
+                            Tipo Proveedor
                         </th>
-                        <th scope="col" class="px-6 py-3 hidden md:table-cell">
+                        {{-- <th scope="col" class="px-6 py-3 hidden md:table-cell">
                             Fecha
-                        </th>
+                        </th> --}}
                         <th scope="col" class="px-6 py-3">
                             <span class="sr-only">Edit</span>
                             Acción
                         </th>
-                        
+
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($proveedores as $index => $item)
                         <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                           <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $index+1 }}
-                            </th>
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ $item->rtn }}
@@ -85,25 +78,25 @@
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ $item->nombre_proveedor }}
                             </th>
-                            <th scope="row"
+                            {{-- <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ $item->telefono }}
-                            </th>
+                            </th> --}}
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ $item->numero_adjudicacion }}
                             </th>
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $item->tipo_adjudicacion_id }}
+                                {{ $item->tipoAdjudicacion->nombre_tipo_adjudicacion }}
                             </th>
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $item->tipo_proveedor_id }}
+                                {{ $item->tipoProveedor->nombre_tipo_proveedor }}
                             </th>
-                            <td class="px-6 py-4 hidden md:table-cell">
+                            {{-- <td class="px-6 py-4 hidden md:table-cell">
                                 {{ $item->created_at }}
-                            </td>
+                            </td> --}}
                             <td class="px-6 py-4 text-right">
 
                                     <button type="button" wire:click.prevent="abrirEditar({{ $item->id }})"

@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
             DepartamentoSeeder::class,
             CategoriaProductoSeeder::class,
             PermisosSeeder::class,
+            TipoAdjudicacionSeeder::class,
+            TipoProveedorSeeder::class,
         ]);
 
         Role::create(['name' => 'Administrador']);
@@ -39,5 +41,9 @@ class DatabaseSeeder extends Seeder
 
         $usuario->assignRole('Administrador');
         $usuario->syncPermissions(Permission::all());
+
+        $this->call([
+            ProveedorSeeder::class
+        ]);
     }
 }
