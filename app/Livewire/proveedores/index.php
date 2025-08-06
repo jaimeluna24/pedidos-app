@@ -71,8 +71,6 @@ class Index extends Component
             return redirect()->route('proveedor.index');
         } catch (ValidationException $e) {
             session()->flash('error', 'Error de validación. Verifica los campos.');
-        } catch (ValidationException $e) {
-            session()->flash('error', 'Error de validación. Verifica los campos.');
         } catch (\Exception $e) {
             Log::error('Error al crear proveedor: ' . $e->getMessage());
             session()->flash('error', 'Ocurrió un error inesperado al crear proveedor.');
@@ -120,7 +118,7 @@ class Index extends Component
                 'numero_adjudicacion' => [
                     'required',
                     'string',
-                    Rule::unique('proveedores', 'numero_adjudicacion')->ignore($this->proveedor->id),
+                    
                 ],
                 'tipo_adjudicacion_id' => [
                     'required',

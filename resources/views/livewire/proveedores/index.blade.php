@@ -55,7 +55,7 @@
                             Numero Adjudicación
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Tipo Ajudi. ID
+                            Tipo Adjudi. ID
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Tipo proveedor ID
