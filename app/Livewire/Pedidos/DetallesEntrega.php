@@ -94,13 +94,15 @@ class DetallesEntrega extends Component
                 'nombre_producto' => $producto->nombre_producto,
                 'unidad' => $producto->unidad->siglas,
                 'pedido' => (string)($productoPedido->cantidad),
-                'recibido' => (string)($productoEntrega->cantidad_recibida),
-                'diferencia' => (string)($productoEntrega->cantidad_recibida - $productoPedido->cantidad),
+                'recibido' => (string)($productoEntrega->cantidad_recibida ?? 0),
+                'diferencia' => (string)($productoEntrega->cantidad_recibida ?? 0 - $productoPedido->cantidad),
                 'precio_unitario' => $producto->total_isv,
                 'valor_pedido' => (string)($productoPedido->cantidad * $producto->total_isv),
-                'valor_recibido' => (string)($productoEntrega->cantidad_recibida * $producto->total_isv),
-                'diferencia_valor' => (string)(($productoEntrega->cantidad_recibida * $producto->total_isv) - ($productoPedido->cantidad * $producto->total_isv))
+                'valor_recibido' => (string)($productoEntrega->cantidad_recibida ?? 0 * $producto->total_isv),
+                'diferencia_valor' => (string)(($productoEntrega->cantidad_recibida ?? 0 * $producto->total_isv) - ($productoPedido->cantidad * $producto->total_isv))
         ];
+
+
     }
 
     public function exportarExcel()

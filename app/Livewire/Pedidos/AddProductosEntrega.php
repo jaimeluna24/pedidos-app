@@ -30,11 +30,14 @@ class AddProductosEntrega extends Component
     public $query = '';
     public $modo_vista = [];
     public $modo_edicion_id = null;
+    public $nuevoProducto = false;
+    public $producto_id = 'Seleccione';
 
     public $productosDisponibles;
     public $productoCantidad = [];
     public $resumenPedido = [];
     public $cantidadEditada = [];
+    public $productosSinAgregar;
 
     public function mount($numero_pedido, $tipo, $factura)
     {
@@ -51,6 +54,7 @@ class AddProductosEntrega extends Component
         $this->nombre_proveedor = $proveedor->nombre_proveedor;
 
         $this->productosDisponibles = collect();
+
 
         $this->buscarProductos();
     }
@@ -70,7 +74,11 @@ class AddProductosEntrega extends Component
             })
             ->with('producto')
             ->get();
-        // Filtrar en memoria los productos ya agregados
+
+        $idsProductoPedido = collect($detalle_pedidos)->pluck('producto_id')->toArray();
+
+        $this->productosSinAgregar = Producto::where('proveedor_id', $this->proveedor_id)->whereNotIn('id', $idsProductoPedido)->get();
+
         $this->productosDisponibles = $detalle_pedidos->filter(function ($detalle) use ($nombresYaAgregados) {
             return !in_array($detalle->producto->nombre_producto, $nombresYaAgregados);
         })->values();
@@ -206,6 +214,34 @@ class AddProductosEntrega extends Component
         } catch (\Exception $e) {
             Log::error('Error al crear la entrega: ' . $e->getMessage());
             session()->flash('error', 'Ocurrió un error inesperado al crear la entrega.');
+        }
+    }
+
+    public function agregarNuevoProducto()
+    {
+        try {
+            $id = (int) $this->producto_id;
+
+            $producto = Producto::find($id);
+
+            DetallePedido::create([
+                'pedido_id' => $this->pedido->id,
+                'producto_id' => $id,
+                'cantidad' => 0,
+                'precio_unitario' => $producto->total_isv,
+                'subtotal' => 0
+            ]);
+
+            $this->nuevoProducto = false;
+            $this->reset(['producto_id']);
+            $this->buscarProductos();
+
+            session()->flash('success', 'Producto agregado exitosamente');
+        } catch (ValidationException $e) {
+            session()->flash('error', 'Error de validación. Verifica los campos.');
+        } catch (\Exception $e) {
+            Log::error('Error al agregar el producto: ' . $e->getMessage());
+            session()->flash('error', 'Ocurrió un error inesperado al agregar el producto.');
         }
     }
 }
