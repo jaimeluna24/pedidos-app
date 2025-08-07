@@ -1,5 +1,6 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 // const { addDynamicIconSelectors } = require('@iconify/tailwind')
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -32,5 +33,16 @@ export default {
     ],
 
         darkMode: 'class',
+
+   
+  theme: {
+    // ...
+  },
+  plugins: [
+    require('flowbite-typography'),
+    // ...
+  ],
 }
+        
+
 

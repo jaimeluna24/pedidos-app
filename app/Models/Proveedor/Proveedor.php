@@ -20,9 +20,20 @@ class Proveedor extends Model
         'tipo_proveedor_id',
         'creador_id'
     ];
+
     public function productos()
     {
         return $this->hasMany(Producto::class, 'proveedor_id');
+    }
+
+    public function tipoAdjudicacion()
+    {
+        return $this->belongsTo(TipoAdjudicacion::class, 'tipo_adjudicacion_id');
+    }
+
+    public function tipoProveedor()
+    {
+        return $this->belongsTo(TipoProveedor::class, 'tipo_proveedor_id');
     }
 
 }

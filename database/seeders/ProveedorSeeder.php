@@ -18,9 +18,9 @@ class ProveedorSeeder extends Seeder
             'nombre_proveedor' => 'Proveedor de Ejemplo',
             'telefono' => '1234-5678',
             'numero_adjudicacion' => 'ADJ-001',
-            'tipo_adjudicacion_id' => 1, // Asumiendo que el ID 1 existe en la tabla tipo_adjudicaciones
-            'tipo_proveedor_id' => 1, // Asumiendo que el ID 1 existe en la tabla tipo_proveedores
-            'creador_id' => 1 // Asumiendo que el usuario con ID 1 existe
+            'tipo_adjudicacion_id' => 1,
+            'tipo_proveedor_id' => 1,
+            'creador_id' => 1
         ]);
     }
 }
