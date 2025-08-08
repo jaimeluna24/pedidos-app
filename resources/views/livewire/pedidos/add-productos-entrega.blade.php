@@ -29,7 +29,8 @@
                     <div class="flex items-center gap-3">
                         <div class="flex items-center justify-center">
                             <button wire:click="$set('nuevoProducto', true);" type="button"
-                                class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-1.5 text-center  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Agregar al pedido</button>
+                                class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-1.5 text-center  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Agregar
+                                al pedido</button>
                             </td>
                         </div>
                         <div class="relative">
@@ -241,16 +242,18 @@
 
         <div class="w-full flex justify-between">
             <x-back-button ruta="pedidos.crear" label="Regresar" />
-            {{-- @if ($resumenPedido) --}}
-            <button type="button" wire:click="crear()"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Guardar</button>
-            {{-- @endif --}}
+            @if ($resumenPedido)
+                @can('Registrar Entregas')
+                    <button type="button" wire:click="crear()"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Guardar</button>
+                @endcan
+            @endif
 
         </div>
     </div>
 
     @if ($nuevoProducto)
-    @include('livewire.pedidos.add-producto-pedido-entrega')
+        @include('livewire.pedidos.add-producto-pedido-entrega')
     @endif
 
     <div wire:loading>

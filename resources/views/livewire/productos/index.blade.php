@@ -25,11 +25,12 @@
                         placeholder="Buscar por nombre o proveedor">
                 </div>
                 <div>
+                    @can('Crear Productos')
                     <a href="{{ route('productos.crear') }}">
                         <button type="button"
                             class="w-full md:w-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Nuevo</button>
                     </a>
-
+                    @endcan
                 </div>
             </div>
         </div>
@@ -100,10 +101,12 @@
                                 {{ $item->created_at }}
                             </td> --}}
                             <td class="px-6 py-1.5 text-right">
+                                @can('Ver Productos')
                                 <a href="{{ route('productos.detalles', $item->id) }}">
                                     <button type="button"
                                         class="w-full md:w-auto text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 py-1.5 dark:bg-orange-600 dark:hover:bg-orange-700 focus:outline-none dark:focus:ring-orange-800">Detalles</button>
                                 </a>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

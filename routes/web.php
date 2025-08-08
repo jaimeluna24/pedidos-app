@@ -37,40 +37,39 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logOut');
 
 
 Route::middleware('auth')->group(function () {
-Route::get('/inicio', Dashboard::class)->name('inicio');
-Route::get('/roles', RolesIndex::class)->name('seguridad.roles.index');
-Route::get('/permisos', PermisosIndex::class)->name('seguridad.permisos.index');
+    Route::get('/inicio', Dashboard::class)->name('inicio');
+    Route::get('/roles', RolesIndex::class)->middleware('permission:Gestionar Roles')->name('seguridad.roles.index');
+    Route::get('/permisos', PermisosIndex::class)->middleware('permission:Gestionar Permisos')->name('seguridad.permisos.index');
 
 
-Route::get('/usuarios', UsuariosIndex::class)->name('usuarios.index');
-Route::get('/usuarios/crear', UsuariosCrear::class)->name('usuarios.crear');
-Route::get('/usuarios/detalles/{id}', UsuariosDetalles::class)->name('usuarios.detalles');
-Route::get('/proveedor', ProveedorIndex::class)->name('proveedor.index');
+    Route::get('/usuarios', UsuariosIndex::class)->middleware('permission:Gestionar Usuarios')->name('usuarios.index');
+    Route::get('/usuarios/crear', UsuariosCrear::class)->middleware('permission:Gestionar Usuarios')->name('usuarios.crear');
+    Route::get('/usuarios/detalles/{id}', UsuariosDetalles::class)->middleware('permission:Gestionar Usuarios')->name('usuarios.detalles');
+    Route::get('/proveedor', ProveedorIndex::class)->middleware('permission:Gestionar Proveedores')->name('proveedor.index');
 
 
-// Mantenimiento
-Route::get('/mantenimiento/categoria-productos', CategoriaIndex::class)->name('mantenimientos.categorias.index');
-route::get('/mantenimiento/departamentos', DepartamentoIndex::class)->name('mantenimientos.departamentos.index');
-// Productos
-Route::get('/productos', ProductosIndex::class)->name('productos.index');
-Route::get('/productos/crear', ProductosCrear::class)->name('productos.crear');
-Route::get('/productos/detalles/{id}', ProductosDetalles::class)->name('productos.detalles');
+    // Mantenimiento
+    Route::get('/mantenimiento/categoria-productos', CategoriaIndex::class)->middleware('permission:Gestionar Categoría de Productos')->name('mantenimientos.categorias.index');
+    route::get('/mantenimiento/departamentos', DepartamentoIndex::class)->middleware('permission:Gestionar Departamentos')->name('mantenimientos.departamentos.index');
+    // Productos
+    Route::get('/productos', ProductosIndex::class)->middleware('permission:Ver Productos')->name('productos.index');
+    Route::get('/productos/crear', ProductosCrear::class)->middleware('permission:Crear Productos')->name('productos.crear');
+    Route::get('/productos/detalles/{id}', ProductosDetalles::class)->middleware('permission:Ver Productos')->name('productos.detalles');
 
 
-// Pedidos
-Route::get('/pedidos', PedidosIndex::class)->name('pedidos.index');
-Route::get('/pedidos/crear', PedidosCrear::class)->name('pedidos.crear');
-Route::get('/pedidos/crear/agregar-productos/{numero_pedido}/{proveedor_id}', PedidosAddProductos::class)->name('pedidos.agregar.productos');
-Route::get('/pedidos/detalles/{id}', PedidosDetalles::class)->name('pedidos.detalles');
-Route::get('/pedidos/editar/{numero_pedido}/{proveedor_id}', PedidosEditar::class)->name('pedidos.editar');
+    // Pedidos
+    Route::get('/pedidos', PedidosIndex::class)->middleware('permission:Ver Pedidos')->name('pedidos.index');
+    Route::get('/pedidos/crear', PedidosCrear::class)->middleware('permission:Crear Pedidos')->name('pedidos.crear');
+    Route::get('/pedidos/crear/agregar-productos/{numero_pedido}/{proveedor_id}', PedidosAddProductos::class)->middleware('permission:Crear Pedidos')->name('pedidos.agregar.productos');
+    Route::get('/pedidos/detalles/{id}', PedidosDetalles::class)->middleware('permission:Ver Pedidos')->name('pedidos.detalles');
+    Route::get('/pedidos/editar/{numero_pedido}/{proveedor_id}', PedidosEditar::class)->middleware('permission:Editar Pedidos')->name('pedidos.editar');
 
-Route::get('/pedidos/entregas', PedidosEntregas::class)->name('pedidos.entregas');
-Route::get('/pedidos/entregas/crear', PedidosEntregasCrear::class)->name('pedidos.entregas.crear');
-Route::get('/pedidos/entregas/crear/agregar-productos/{numero_pedido}/{tipo}/{factura}', PedidosAddProductosEntregas::class)->name('pedidos.entregas.agregar.productos');
-Route::get('/pedidos/entregas/detalles/{id}', PedidosDetallesEntregas::class)->name('pedidos.entregas.detalles');
+    Route::get('/pedidos/entregas', PedidosEntregas::class)->middleware('permission:Ver Entregas')->name('pedidos.entregas');
+    Route::get('/pedidos/entregas/crear', PedidosEntregasCrear::class)->middleware('permission:Registrar Entregas')->name('pedidos.entregas.crear');
+    Route::get('/pedidos/entregas/crear/agregar-productos/{numero_pedido}/{tipo}/{factura}', PedidosAddProductosEntregas::class)->middleware('permission:')->name('pedidos.entregas.agregar.productos');
+    Route::get('/pedidos/entregas/detalles/{id}', PedidosDetallesEntregas::class)->middleware('permission:Ver Entregas')->name('pedidos.entregas.detalles');
 
-// Inventario
-Route::get('/Inventarios', InventariosIndex::class)->name('inventarios.index');
-Route::get('/Inventarios/detalles/{id}', InventariosDetalles::class)->name('inventarios.detalles');
+    // Inventario
+    Route::get('/Inventarios', InventariosIndex::class)->middleware('permission:Gestionar Inventarios')->name('inventarios.index');
+    Route::get('/Inventarios/detalles/{id}', InventariosDetalles::class)->middleware('permission:Gestionar Inventarios')->name('inventarios.detalles');
 });
-

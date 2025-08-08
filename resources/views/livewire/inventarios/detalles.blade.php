@@ -118,7 +118,7 @@
                         value="{{ $inventario->cantidad_minima }}" @if($modo_cantidad_minima == true) disabled @endif
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                          />
-
+                    @can('Gestionar Inventarios')
                     @if ($modo_cantidad_minima == false)
                         <button wire:click="guardarCantidadMinima()"
                             class="inline-flex items-center justify-center p-1 text-sm font-medium h-6 w-6 text-gray-500 bg-white border border-green-300 rounded-full focus:outline-none hover:bg-green-100 focus:ring-4 focus:ring-green-200 dark:bg-green-800 dark:text-green-400 dark:border-green-600 dark:hover:bg-green-700 dark:hover:border-green-600 dark:focus:ring-green-700"
@@ -147,6 +147,7 @@
                             </svg>
                         </button>
                     @endif
+                    @endcan
                 </div>
 
             </div>

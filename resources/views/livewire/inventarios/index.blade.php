@@ -116,6 +116,7 @@
                                 {{ $egresos }}
                             </td>
                             <td class="px-6 py-2 text-center flex gap-2">
+                            @can('Gestionar Inventarios')
                                 <a href="{{ route('inventarios.detalles', $item->id) }}">
                                     <button data-tooltip-target="tooltip-detalles-{{ $item->id }}" type="button"
                                         class="w-full md:w-auto text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-2 py-1 dark:bg-orange-600 dark:hover:bg-orange-700 focus:outline-none dark:focus:ring-orange-800">
@@ -125,9 +126,8 @@
                                                 d="M20 3H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m-9 14H5v-2h6zm8-4H5v-2h14zm0-4H5V7h14z" />
                                         </svg>
                                     </button>
-
-
                                 </a>
+
 
                                 <button data-tooltip-target="tooltip-movimientos-{{ $item->id }}" type="button"
                                     wire:click.prevent="abrirMovimientos({{ $item->id }})"
@@ -143,6 +143,7 @@
                                         </g>
                                     </svg>
                                 </button>
+                                 @endcan
                             </td>
                         </tr>
                         <div id="tooltip-detalles-{{ $item->id }}" role="tooltip"

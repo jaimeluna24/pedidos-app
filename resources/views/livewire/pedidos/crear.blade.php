@@ -44,10 +44,13 @@
         <div class="w-full flex justify-between">
             <x-back-button ruta="pedidos.index" label="Regresar" />
             @if (is_numeric($proveedor_id) && $proveedor_id > 0)
-                 <a href="{{ route('pedidos.agregar.productos', [$numero_pedido, $proveedor_id]) }}">
-                <button type="button"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Agregar Productos</button>
-            </a>
+                @can('Crear Pedidos')
+                    <a href="{{ route('pedidos.agregar.productos', [$numero_pedido, $proveedor_id]) }}">
+                        <button type="button"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Agregar
+                            Productos</button>
+                    </a>
+                @endcan
             @endif
         </div>
     </div>

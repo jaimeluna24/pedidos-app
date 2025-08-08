@@ -25,7 +25,7 @@ class PermisosSeeder extends Seeder
             ['name' => 'Ver Productos'],
             ['name' => 'Editar Productos'],
             ['name' => 'Eliminar Productos'],
-            ['name' => 'Gestonar Inventarios'],
+            ['name' => 'Gestionar Inventarios'],
             ['name' => 'Gestionar Usuarios'],
             ['name' => 'Gestionar Categoría de Productos'],
             ['name' => 'Gestionar Departamentos'],
