@@ -23,12 +23,13 @@ class Index extends Component
 
     public function render()
     {
-        $inventarios = Inventario::where(function ($query) {
-            $query->orWhereHas('producto', function ($q) {
+        $inventarios = Inventario::join('productos', 'inventarios.producto_id', '=', 'productos.id')
+            ->whereHas('producto', function ($q) {
                 $q->where('nombre_producto', 'like', '%' . $this->query . '%');
-            });
-        })
-            ->paginate(15);
+            })
+            ->orderBy('productos.nombre_producto', 'asc')
+            ->select('inventarios.*') // importante para que el paginador funcione bien
+            ->paginate(35);
         return view('livewire.inventarios.index', ['inventarios' => $inventarios]);
     }
 

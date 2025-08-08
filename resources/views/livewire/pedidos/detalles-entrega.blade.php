@@ -14,22 +14,22 @@
                 </div>
             </div>
             <div class="flex justify-end gap-4">
-                    <div>
-                        @if ($pedido->pedido->estado_entrega == 'Entregado')
-                            <div class="flex items-center p-2 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800"
-                                role="alert">
-                                <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-                                </svg>
-                                <span class="sr-only">Info</span>
-                                <div>
-                                    <span class="font-medium">Recibido</span>
-                                </div>
+                <div>
+                    @if ($pedido->pedido->estado_entrega == 'Entregado')
+                        <div class="flex items-center p-2 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800"
+                            role="alert">
+                            <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                            </svg>
+                            <span class="sr-only">Info</span>
+                            <div>
+                                <span class="font-medium">Recibido</span>
                             </div>
-                        @endif
-                    </div>
+                        </div>
+                    @endif
+                </div>
             </div>
         </div>
     </div>
@@ -39,10 +39,10 @@
         <div class="p-4">
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <div
-                    class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-end pb-4">
-                    {{-- <div class="text-2xl font-semibold text-gray-900 dark:text-white">
-                            Seleccione
-                        </div> --}}
+                    class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
+
+                    <button wire:click="exportarExcel()" type="button"
+                        class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-1.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-grren-700 dark:focus:ring-green-800">Exportar a Excel</button>
                     <label for="table-search" class="sr-only">Search</label>
                     <div class="relative">
                         <div
@@ -117,23 +117,23 @@
         <div class="w-full flex justify-between">
             <x-back-button ruta="pedidos.entregas" label="Regresar" />
 
-                <div>
-                    @if ($pedido->pedido->estado_entrega == 'Entregado')
-                        <div class="flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800"
-                            role="alert">
-                            <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-                            </svg>
-                            <span class="sr-only">Info</span>
-                            <div>
-                                <span class="font-medium">Pedido Recibido</span> por el usuario {{ $nombre_user }}
-                                el {{ $pedido->pedido->fecha_entrega }}
-                            </div>
+            <div>
+                @if ($pedido->pedido->estado_entrega == 'Entregado')
+                    <div class="flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800"
+                        role="alert">
+                        <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                        </svg>
+                        <span class="sr-only">Info</span>
+                        <div>
+                            <span class="font-medium">Pedido Recibido</span> por el usuario {{ $nombre_user }}
+                            el {{ $pedido->pedido->fecha_entrega }}
                         </div>
-                    @endif
-                </div>
+                    </div>
+                @endif
+            </div>
         </div>
     </div>
 

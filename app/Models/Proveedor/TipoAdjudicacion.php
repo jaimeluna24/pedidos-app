@@ -15,8 +15,8 @@ class TipoAdjudicacion extends Model
         'id',
         'nombre_tipo_adjudicacion',
         'observacion',
-
     ];
+
     public function proveedor()
     {
         return $this->hasMany(Proveedor::class, 'tipo_adjudicacion_id');

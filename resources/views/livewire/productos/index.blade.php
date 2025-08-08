@@ -60,9 +60,9 @@
                         <th scope="col" class="px-6 py-3">
                             Precio
                         </th>
-                        <th scope="col" class="px-6 py-3 hidden md:table-cell">
+                        {{-- <th scope="col" class="px-6 py-3 hidden md:table-cell">
                             Fecha
-                        </th>
+                        </th> --}}
                         <th scope="col" class="px-6 py-3">
                             <span class="sr-only">Edit</span>
                             Acción
@@ -73,36 +73,36 @@
                     @foreach ($productos as $index => $item)
                         <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
                             <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                class="px-6 py-1.5 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ $item->codigo_producto }}
                             </th>
-                            <th scope="row"
-                                class="px-6 py-4 text-gray-900 dark:text-white">
+                            <td scope="row"
+                                class="px-6 py-1.5 text-gray-900 dark:text-white">
                                 {{ $item->nombre_producto }}
-                            </th>
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                            </td>
+                            <td scope="row"
+                                class="px-6 py-1.5 ">
                                 {{ $item->proveedor->nombre_proveedor }}
-                            </th>
+                            </td>
                             {{-- <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ $item->categoria->nombre_categoria }}
                             </th> --}}
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <td scope="row"
+                                class="px-6 py-1.5">
                                 {{ $item->unidad->nombre_unidad_medida }} ({{ $item->unidad->siglas }})
-                            </th>
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                L. {{ $item->total_isv }}
-                            </th>
-                            <td class="px-6 py-4 hidden md:table-cell">
-                                {{ $item->created_at }}
                             </td>
-                            <td class="px-6 py-4 text-right">
+                            <td scope="row"
+                                class="px-6 py-1.5">
+                                L. {{ $item->total_isv }}
+                            </td>
+                            {{-- <td class="px-6 py-1.5 hidden md:table-cell">
+                                {{ $item->created_at }}
+                            </td> --}}
+                            <td class="px-6 py-1.5 text-right">
                                 <a href="{{ route('productos.detalles', $item->id) }}">
                                     <button type="button"
-                                        class="w-full md:w-auto text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 focus:outline-none dark:focus:ring-orange-800">Detalles</button>
+                                        class="w-full md:w-auto text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 py-1.5 dark:bg-orange-600 dark:hover:bg-orange-700 focus:outline-none dark:focus:ring-orange-800">Detalles</button>
                                 </a>
                             </td>
                         </tr>

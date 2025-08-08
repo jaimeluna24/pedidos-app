@@ -17,21 +17,21 @@
     </div>
 
     <div action="">
-        @if ($productosDisponibles->isEmpty())
-            <div class="flex justify-center gap-8 border-b">
-                <div class="text-2xl font-semibold text-gray-900 dark:text-white mb-10 mt-10">
-                    Todos los productos ya han sido seleccionados
-                </div>
-            </div>
-        @else
-            <div class="p-4">
-                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                    <div
-                        class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
-                        <div class="text-2xl font-semibold text-gray-900 dark:text-white">
-                            Seleccione
+
+        <div class="p-4">
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <div
+                    class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
+                    <div class="text-2xl font-semibold text-gray-900 dark:text-white">
+                        Seleccione
+                    </div>
+                    <label for="table-search" class="sr-only">Search</label>
+                    <div class="flex items-center gap-3">
+                        <div class="flex items-center justify-center">
+                            <button wire:click="$set('nuevoProducto', true);" type="button"
+                                class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-1.5 text-center  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Agregar al pedido</button>
+                            </td>
                         </div>
-                        <label for="table-search" class="sr-only">Search</label>
                         <div class="relative">
                             <div
                                 class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">
@@ -47,38 +47,46 @@
                                 placeholder="Buscar por Nombre de Producto">
                         </div>
                     </div>
-                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                            <tr>
-                                <th scope="col" class="px-6 py-3">
-                                    Producto
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    UM
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Precio Unitario
-                                </th>
-                                <th scope="col" class="px-4 py-3">
-                                    Cant. Pedida
-                                </th>
-                                <th scope="col" class="px-8 py-3">
-                                    Monto
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Cant. Recibida
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Acción
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
+
+                </div>
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Producto
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                UM
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Precio Unitario
+                            </th>
+                            <th scope="col" class="px-4 py-3">
+                                Cant. Pedida
+                            </th>
+                            <th scope="col" class="px-8 py-3">
+                                Monto
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Cant. Recibida
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Acción
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if ($productosDisponibles->isEmpty())
+                            <div class="flex justify-center gap-8 border-b">
+                                <div class="text-2xl font-semibold text-gray-900 dark:text-white mb-10 mt-10">
+                                    Todos los productos ya han sido seleccionados
+                                </div>
+                            </div>
+                        @else
                             @foreach ($productosDisponibles as $item)
                                 <tr
                                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <th scope="row"
-                                        class="px-6 py-1 font-medium text-gray-900 dark:text-white">
+                                    <th scope="row" class="px-6 py-1 font-medium text-gray-900 dark:text-white">
                                         {{ $item->producto->nombre_producto }}
                                     </th>
                                     <td class="px-6 py-1">
@@ -111,11 +119,12 @@
                                     </td>
                                 </tr>
                             @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                        @endif
+
+                    </tbody>
+                </table>
             </div>
-        @endif
+        </div>
 
 
         @if ($resumenPedido)
@@ -155,8 +164,7 @@
                             @foreach ($resumenPedido as $item)
                                 <tr
                                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <th scope="row"
-                                        class="px-6 py-1 font-medium text-gray-900 dark:text-white">
+                                    <th scope="row" class="px-6 py-1 font-medium text-gray-900 dark:text-white">
                                         {{ $item['nombre_producto'] }}
                                     </th>
                                     <td class="px-6 py-1">
@@ -175,7 +183,8 @@
                                                         class="bg-gray-50 w-24 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                         placeholder="1" required min="0" autocomplete="off" />
                                                 @else
-                                                    <input type="number" id="first_product-{{ $item['producto_id'] }}"
+                                                    <input type="number"
+                                                        id="first_product-{{ $item['producto_id'] }}"
                                                         value="{{ $item['cantidad'] }}" @disabled($modo_edicion_id !== $item['producto_id'])
                                                         class="bg-gray-50 w-24 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                         placeholder="1" required min="0" autocomplete="off" />
@@ -239,6 +248,10 @@
 
         </div>
     </div>
+
+    @if ($nuevoProducto)
+    @include('livewire.pedidos.add-producto-pedido-entrega')
+    @endif
 
     <div wire:loading>
         <livewire:loader :mensaje="'Cargando...'" />

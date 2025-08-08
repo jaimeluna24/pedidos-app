@@ -13,6 +13,7 @@ class CrearEntregas extends Component
     public $tipo;
     public $pedido;
     public $factura = null;
+    public $estado_pedido = 'Sin Aprobar';
 
     public function render()
     {
@@ -26,6 +27,7 @@ class CrearEntregas extends Component
         if ($pedido) {
             $this->pedido = $pedido;
             $this->detalle_pedido = $detalle_pedido;
+            $this->estado_pedido = $pedido->estado_pedido;
             session()->flash('success', 'Pedido encontrado exitosamente.');
         } else {
             session()->flash('success', 'El pedido no se ha encontrado, verifique el número de pedido.');

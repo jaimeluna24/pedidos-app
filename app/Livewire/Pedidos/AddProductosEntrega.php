@@ -30,11 +30,14 @@ class AddProductosEntrega extends Component
     public $query = '';
     public $modo_vista = [];
     public $modo_edicion_id = null;
+    public $nuevoProducto = false;
+    public $producto_id = 'Seleccione';
 
     public $productosDisponibles;
     public $productoCantidad = [];
     public $resumenPedido = [];
     public $cantidadEditada = [];
+    public $productosSinAgregar;
 
     public function mount($numero_pedido, $tipo, $factura)
     {
@@ -52,6 +55,7 @@ class AddProductosEntrega extends Component
 
         $this->productosDisponibles = collect();
 
+
         $this->buscarProductos();
     }
 
@@ -62,13 +66,22 @@ class AddProductosEntrega extends Component
 
     public function buscarProductos()
     {
-         $detalle_pedidos = DetallePedido::where('pedido_id', $this->pedido->id)
+        $nombresYaAgregados = collect($this->resumenPedido)->pluck('nombre_producto')->toArray();
+
+        $detalle_pedidos = DetallePedido::where('pedido_id', $this->pedido->id)
             ->whereHas('producto', function ($query) {
                 $query->where('nombre_producto', 'like', '%' . $this->query . '%');
             })
             ->with('producto')
             ->get();
-        $this->productosDisponibles = $detalle_pedidos;
+
+        $idsProductoPedido = collect($detalle_pedidos)->pluck('producto_id')->toArray();
+
+        $this->productosSinAgregar = Producto::where('proveedor_id', $this->proveedor_id)->whereNotIn('id', $idsProductoPedido)->get();
+
+        $this->productosDisponibles = $detalle_pedidos->filter(function ($detalle) use ($nombresYaAgregados) {
+            return !in_array($detalle->producto->nombre_producto, $nombresYaAgregados);
+        })->values();
         // dd($this->productosDisponibles);
     }
 
@@ -77,7 +90,7 @@ class AddProductosEntrega extends Component
         return view('livewire.pedidos.add-productos-entrega');
     }
 
-     public function agregarProducto($productoId)
+    public function agregarProducto($productoId)
     {
         $producto = $this->productosDisponibles->find($productoId);
 
@@ -94,6 +107,9 @@ class AddProductosEntrega extends Component
             'precio_unitario' => $producto->producto->total_isv,
             'subtotal' => $this->productoCantidad[$productoId] * $producto->producto->total_isv,
         ];
+
+        $this->query = '';
+        $this->buscarProductos();
 
         $this->productosDisponibles = $this->productosDisponibles->filter(fn($p) => $p->id !== $productoId);
 
@@ -151,7 +167,7 @@ class AddProductosEntrega extends Component
         $this->modo_edicion_id = null;
     }
 
-     public function crear()
+    public function crear()
     {
         try {
             $pedidoEntrega = PedidoEntrega::create([
@@ -182,7 +198,7 @@ class AddProductosEntrega extends Component
                     'tipo_movimiento' => 'Ingreso',
                     'cantidad' => $detalle->cantidad_recibida,
                     'entrega_id' => $pedidoEntrega->id,
-                     'usuario_id' => $this->usuario_id
+                    'usuario_id' => $this->usuario_id
                 ]);
 
                 $inventario->update([
@@ -198,6 +214,34 @@ class AddProductosEntrega extends Component
         } catch (\Exception $e) {
             Log::error('Error al crear la entrega: ' . $e->getMessage());
             session()->flash('error', 'Ocurrió un error inesperado al crear la entrega.');
+        }
+    }
+
+    public function agregarNuevoProducto()
+    {
+        try {
+            $id = (int) $this->producto_id;
+
+            $producto = Producto::find($id);
+
+            DetallePedido::create([
+                'pedido_id' => $this->pedido->id,
+                'producto_id' => $id,
+                'cantidad' => 0,
+                'precio_unitario' => $producto->total_isv,
+                'subtotal' => 0
+            ]);
+
+            $this->nuevoProducto = false;
+            $this->reset(['producto_id']);
+            $this->buscarProductos();
+
+            session()->flash('success', 'Producto agregado exitosamente');
+        } catch (ValidationException $e) {
+            session()->flash('error', 'Error de validación. Verifica los campos.');
+        } catch (\Exception $e) {
+            Log::error('Error al agregar el producto: ' . $e->getMessage());
+            session()->flash('error', 'Ocurrió un error inesperado al agregar el producto.');
         }
     }
 }
