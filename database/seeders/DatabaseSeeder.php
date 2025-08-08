@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Proveedor\Proveedor;
+use App\Models\Proveedor\TipoAdjudicacion;
+use App\Models\Proveedor\TipoProveedor;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -19,28 +22,14 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
         $this->call([
             DepartamentoSeeder::class,
+            UnidadMedidaSeeder::class,
             CategoriaProductoSeeder::class,
             PermisosSeeder::class,
             TipoAdjudicacionSeeder::class,
             TipoProveedorSeeder::class,
+            ProductoSeeder::class
         ]);
 
-        Role::create(['name' => 'Administrador']);
-        Role::create(['name' => 'Cliente']);
-
-        $usuario = Usuario::create([
-            'dni' => '0607200100129',
-            'nombre' => 'Jaime David',
-            'apellido' => 'Luna Ponce',
-            'nombre_usuario' => 'JDLP24',
-            'email' => 'jaimeluna600@gmail.com',
-            'telefono' => '88461192',
-            'password' => '12345678',
-            'departamento_id' => 1
-        ]);
-
-        $usuario->assignRole('Administrador');
-        $usuario->syncPermissions(Permission::all());
 
         $this->call([
             ProveedorSeeder::class

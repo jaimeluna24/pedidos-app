@@ -31,7 +31,7 @@ class PermisosSeeder extends Seeder
             ['name' => 'Gestionar Departamentos'],
             ['name' => 'Gestionar Proveedores'],
             ['name' => 'Gestionar Roles'],
-            ['name' => 'Gesyionar Permisos'],
+            ['name' => 'Gestionar Permisos'],
         ];
 
         foreach ($permisos as $permiso) {

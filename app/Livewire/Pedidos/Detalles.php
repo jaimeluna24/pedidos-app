@@ -137,7 +137,7 @@ class Detalles extends Component
             function () use ($pdfContent) {
                 echo $pdfContent;
             },
-            'CERTIFICACION_INTEGRA_DE_DOCUMENTOS.pdf',
+            'Pedido_' . $this->pedido->numero_pedido . '.pdf',
             [
                 'Content-Type' => 'application/pdf',
             ]
