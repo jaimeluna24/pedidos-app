@@ -66,7 +66,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/pedidos/entregas', PedidosEntregas::class)->middleware('permission:Ver Entregas')->name('pedidos.entregas');
     Route::get('/pedidos/entregas/crear', PedidosEntregasCrear::class)->middleware('permission:Registrar Entregas')->name('pedidos.entregas.crear');
-    Route::get('/pedidos/entregas/crear/agregar-productos/{numero_pedido}/{tipo}/{factura}', PedidosAddProductosEntregas::class)->middleware('permission:')->name('pedidos.entregas.agregar.productos');
+    Route::get('/pedidos/entregas/crear/agregar-productos/{numero_pedido}/{tipo}/{factura}', PedidosAddProductosEntregas::class)->middleware('permission:Registrar Entregas')->name('pedidos.entregas.agregar.productos');
     Route::get('/pedidos/entregas/detalles/{id}', PedidosDetallesEntregas::class)->middleware('permission:Ver Entregas')->name('pedidos.entregas.detalles');
 
     // Inventario
