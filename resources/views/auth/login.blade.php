@@ -13,6 +13,8 @@
 
 <body class="bg-gray-900">
     <!-- https://play.tailwindcss.com/MIwj5Sp9pw -->
+    <x-alerts.success-alert />
+    <x-alerts.error-alert />
     <div class="pt-16">
         <div class="flex bg-gray-800 text-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
 

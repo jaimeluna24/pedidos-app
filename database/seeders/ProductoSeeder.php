@@ -20,59 +20,6 @@ class ProductoSeeder extends Seeder
      */
     public function run(): void
     {
-        Role::create(['name' => 'Administrador']);
-        Role::create(['name' => 'Cliente']);
-
-        $usuario = Usuario::create([
-            'dni' => '0607200100129',
-            'nombre' => 'Jaime David',
-            'apellido' => 'Luna Ponce',
-            'nombre_usuario' => 'JDLP24',
-            'email' => 'jaimeluna600@gmail.com',
-            'telefono' => '88461192',
-            'password' => '12345678',
-            'departamento_id' => 1
-        ]);
-
-        $usuario->assignRole('Administrador');
-        $usuario->syncPermissions(Permission::all());
-
-        TipoAdjudicacion::create([
-            [
-            'nombre_tipo_adjudicacion' => 'Adjudicación Directa',
-            'observacion' => 'Proceso de adjudicación sin licitación previa.',
-            ],
-            [
-                'nombre_tipo_adjudicacion' => 'Licitación Pública',
-                'observacion' => 'Proceso abierto a todos los interesados.',
-            ],
-            [
-                'nombre_tipo_adjudicacion' => 'Contratación por Contrato Menor',
-                'observacion' => 'Contratación sin concurso previo.',
-            ]
-        ]);
-
-        TipoProveedor::create([
-            [
-            'nombre_tipo_proveedor' => 'Proveedor Nacional',
-            'observacion' => 'Proveedor ubicado dentro del país.',
-            ],
-            [
-                'nombre_tipo_adjudicacion' => 'Proveedor Internacional',
-                'observacion' => 'Proveedor ubicado fuera del país.',
-            ]
-        ]);
-
-        Proveedor::create([
-            'rtn' => '09091988098767',
-            'nombre_proveedor' => 'BANASUPRO',
-            'telefono' => '88763452',
-            'numero_adjudicacion' => 'UE-0901-2025',
-            'tipo_adjudicacion_id' => 1,
-            'tipo_proveedor_id' => 1,
-            'creador_id' => 1
-        ]);
-
         $productos = [
             [
                 'codigo_producto' => '100788',

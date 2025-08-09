@@ -2,11 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Proveedor\Proveedor;
-use App\Models\Proveedor\TipoAdjudicacion;
-use App\Models\Proveedor\TipoProveedor;
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Usuario\Usuario;
 use Spatie\Permission\Models\Permission;
@@ -19,20 +14,36 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
         $this->call([
             DepartamentoSeeder::class,
+            PermisosSeeder::class,
+        ]);
+
+        Role::create(['name' => 'Administrador']);
+        Role::create(['name' => 'Cliente']);
+
+        $usuario = Usuario::create([
+            'dni' => '0000000000000',
+            'nombre' => 'Root',
+            'apellido' => 'Root',
+            'nombre_usuario' => 'Root',
+            'email' => 'root@gmail.com',
+            'telefono' => '11223344',
+            'password' => '12345678',
+            'departamento_id' => 1
+        ]);
+
+        $usuario->assignRole('Administrador');
+        $usuario->syncPermissions(Permission::all());
+        // User::factory(10)->create();
+        $this->call([
             UnidadMedidaSeeder::class,
             CategoriaProductoSeeder::class,
-            PermisosSeeder::class,
             TipoAdjudicacionSeeder::class,
             TipoProveedorSeeder::class,
+            ProveedorSeeder::class,
             ProductoSeeder::class
         ]);
 
-
-        $this->call([
-            ProveedorSeeder::class
-        ]);
     }
 }

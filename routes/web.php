@@ -8,6 +8,7 @@ use App\Livewire\Permisos\Index as PermisosIndex;
 use App\Livewire\Usuarios\Index as UsuariosIndex;
 use App\Livewire\Usuarios\Crear as UsuariosCrear;
 use App\Livewire\Usuarios\Detalles as UsuariosDetalles;
+use App\Livewire\Usuarios\CambioPassword as UsuarioCambioPassword;
 use App\Livewire\CategoriaProductos\Index as CategoriaIndex;
 use App\Livewire\Proveedores\Index as ProveedorIndex;
 use App\Livewire\Departamentos\Index as DepartamentoIndex;
@@ -38,6 +39,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logOut');
 
 Route::middleware('auth')->group(function () {
     Route::get('/inicio', Dashboard::class)->name('inicio');
+    Route::get('/cambiar-password', UsuarioCambioPassword::class)->name('cambio-password');
     Route::get('/roles', RolesIndex::class)->middleware('permission:Gestionar Roles')->name('seguridad.roles.index');
     Route::get('/permisos', PermisosIndex::class)->middleware('permission:Gestionar Permisos')->name('seguridad.permisos.index');
 

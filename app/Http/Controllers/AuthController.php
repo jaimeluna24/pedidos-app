@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -12,43 +13,47 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-     /**
-	* Función que muestra la vista de logados o la vista con el formulario de Login
-	*/
-	public function index()
-	{
-	    // Comprobamos si el usuario ya está logado
-	    if (Auth::check()) {
+    /**
+     * Función que muestra la vista de logados o la vista con el formulario de Login
+     */
+    public function index()
+    {
+        // Comprobamos si el usuario ya está logado
+        if (Auth::check()) {
 
-	         return redirect()->intended('/inicio');
-	    }
+            return redirect()->intended('/inicio');
+        }
 
-	    // Si no está logado le mostramos la vista con el formulario de login
-	    return view('auth.login');
-	}
+        // Si no está logado le mostramos la vista con el formulario de login
+        return view('auth.login');
+    }
 
     public function loginUser(Request $request)
-	{
-	    // Comprobamos que el email y la contraseña han sido introducidos
-	    $request->validate([
-	        'nombre_usuario' => 'required',
-	        'password' => 'required',
-	    ]);
+    {
+        $request->validate([
+            'nombre_usuario' => 'required',
+            'password' => 'required',
+        ]);
 
-	    // Almacenamos las credenciales de email y contraseña
-	    $credentials = $request->only('nombre_usuario', 'password');
+        $credentials = $request->only('nombre_usuario', 'password');
 
-	    // Si el usuario existe lo logamos y lo llevamos a la vista de "logados" con un mensaje
-	    if (Auth::attempt($credentials)) {
-	        return redirect()->intended('/inicio')
-	            ->withSuccess('Logado Correctamente');
-	    }
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            // Verificar si la contraseña es la predeterminada
+            if (Hash::check('12345678', $user->password)) {
+                return redirect()->intended('/cambiar-password')
+                    ->withSuccess('Logado correctamente, cambie su contraseña.');
+            }
 
-	    // Si el usuario no existe devolvemos al usuario al formulario de login con un mensaje de error
-	    return redirect("/")->withSuccess('Los datos introducidos no son correctos');
-	}
+            return redirect()->intended('/inicio')
+                ->withSuccess('Logado correctamente');
+        }
 
-     public function logout(Request $request)
+        return redirect("/")
+            ->withErrors(['error' => 'Los datos introducidos no son correctos']);
+    }
+
+    public function logout(Request $request)
     {
         Auth::logout();
 
