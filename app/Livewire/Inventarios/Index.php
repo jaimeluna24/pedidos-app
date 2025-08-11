@@ -20,6 +20,7 @@ class Index extends Component
     public $cantidad_disponible;
     public $cantidad = 1;
     public $modal = false;
+    public $referencia;
 
     public function render()
     {
@@ -60,6 +61,7 @@ class Index extends Component
                 'inventario_id' => $this->inventario->id,
                 'tipo_movimiento' => $this->tipo_movimiento,
                 'cantidad' => $this->cantidad,
+                'referencia' => $this->referencia,
                 'usuario_id' => $user->id,
             ]);
 
@@ -75,7 +77,7 @@ class Index extends Component
                 ]);
             }
 
-            $this->reset(['modal', 'nombre_producto', 'cantidad_disponible', 'cantidad', 'tipo_movimiento']);
+            $this->reset(['modal', 'nombre_producto', 'cantidad_disponible', 'cantidad', 'tipo_movimiento', 'referencia']);
 
             session()->flash('success', 'Movimiento realizado exitosamente.');
             $this->modal = false;

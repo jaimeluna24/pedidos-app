@@ -439,7 +439,7 @@
     <script>
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
     </script>
-    <script src="{{ asset('node_modules/flowbite/dist/flowbite.min.js') }}"></script>
+    {{-- <script src="{{ asset('node_modules/flowbite/dist/flowbite.min.js') }}"></script> --}}
 
 </body>
 

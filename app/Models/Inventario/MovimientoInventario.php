@@ -18,6 +18,7 @@ class MovimientoInventario extends Model
         'inventario_id',
         'tipo_movimiento',
         'cantidad',
+        'referencia',
         'entrega_id',
         'usuario_id'
     ];

@@ -15,7 +15,7 @@
             </div>
             @if ($modo_vista)
                 <div class="gap-4">
-                    @can('Editar Produtos')
+                    @can('Editar Productos')
                         <button type="button" wire:click="$set('modo_vista', false);"
                             class="w-full md:w-auto text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-yellow-600 dark:hover:bg-yellow-700 focus:outline-none dark:focus:ring-yellow-800">Editar</button>
                     @endcan

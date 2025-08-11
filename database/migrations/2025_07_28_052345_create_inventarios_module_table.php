@@ -27,6 +27,7 @@ return new class extends Migration
             $table->foreignId('inventario_id')->constrained('inventarios');
             $table->string('tipo_movimiento');
             $table->decimal('cantidad', 8, 2);
+            $table->string('referencia')->nullable();
             $table->unsignedBigInteger('entrega_id')->nullable();
             $table->foreign('entrega_id')->references('id')->on('pedido_entregas');
             $table->foreignId('usuario_id')->constrained('users');
