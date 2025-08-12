@@ -4,13 +4,13 @@
 
     <div class="relative overflow-x-auto  border-b mb-2 p-4">
         <div class="flex flex-column sm:flex-row flex-wrap space-y-1 sm:space-y-0 items-center justify-between ">
-            <div class="flex items-center gap-8">
+            <div class="flex justify-start gap-4 w-full md:w-1/2">
                 <div class="text-2xl font-semibold text-gray-900 dark:text-white">
                     Lista de Pedidos
                 </div>
             </div>
-            <div class="flex justify-between gap-4 w-full md:w-1/2">
-                <div class="relative w-full">
+            <div class="flex justify-between gap-2 w-full md:w-1/2">
+                <div class="relative w-full ">
                     <div
                         class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">
                         <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor"
@@ -24,7 +24,9 @@
                         class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Buscar por número de pedido o proveedor">
                 </div>
-                <div>
+                <div class="flex items-center gap-2">
+                    
+                <div >
                     @can('Crear Pedidos')
                     <a href="{{ route('pedidos.crear') }}">
                         <button type="button"
@@ -34,6 +36,27 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class=" gap-4 w-full md:w-1/2 flex flex-wrap items-center">
+        <div >
+                        <input wire:model.live="fecha_inicio" type="date"
+                            class="relative w-8 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Fecha Inicio" />
+                    </div>
+                    <div>
+                        <input wire:model.live="fecha_fin" type="date"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Fecha Fin" />
+                    </div>
+                    <div>
+                        <button wire:click="resetFilters" type="button"
+                            class="w-full md:w-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                         </svg>
+                        </button>
+                    </div>
+
     </div>
 
     @if ($pedidos->isEmpty())

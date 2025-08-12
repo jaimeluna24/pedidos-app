@@ -11,6 +11,8 @@ class Index extends Component
     use WithPagination;
 
     public $query = '';
+    public $fecha_inicio = '';
+    public $fecha_fin = '';
 
     public function render()
     {
@@ -20,7 +22,20 @@ class Index extends Component
                     $q->where('nombre_proveedor', 'like', '%' . $this->query . '%');
                 });
         })
+        ->when($this->fecha_inicio && $this->fecha_fin, function ($query) {
+            $query->whereBetween('created_at', [
+                $this->fecha_inicio . ' 00:00:00',
+                $this->fecha_fin . ' 23:59:59'
+            ]);
+        })
+        
             ->paginate(10);
         return view('livewire.pedidos.index', ['pedidos' => $pedidos]);
+    }
+    public function resetFilters(){
+
+    $this->reset(['fecha_inicio', 'fecha_fin', 'query']);
+     $this->resetPage();
+
     }
 }
