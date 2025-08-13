@@ -4,12 +4,32 @@
 
     <div class="relative overflow-x-auto  border-b mb-2 p-4">
         <div class="flex flex-column sm:flex-row flex-wrap space-y-1 sm:space-y-0 items-center justify-between ">
-            <div class="flex justify-start gap-4 w-full md:w-1/2">
+            <div class="flex justify-start gap-4 w-full md:w-1/5">
                 <div class="text-2xl font-semibold text-gray-900 dark:text-white">
                     Lista de Pedidos
                 </div>
             </div>
-            <div class="flex justify-between gap-2 w-full md:w-1/2">
+            <div class="gap-2 w-full md:w-2/5 flex flex-wrap items-center justify-end pr-2">
+                  <div>
+                    <button wire:click="resetFilters" type="button"
+                        class="w-full md:w-auto text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 focus:outline-none dark:focus:ring-orange-800">
+                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#ffffff" d="M14.8 11.975L6.825 4H19q.625 0 .9.55t-.1 1.05zM19.775 22.6L14 16.825V19q0 .425-.288.713T13 20h-2q-.425 0-.712-.288T10 19v-6.175l-8.6-8.6L2.8 2.8l18.4 18.4z"/></svg>
+                    </button>
+                </div>
+                <div>
+                    <input wire:model.live="fecha_inicio" type="date"
+                        class="relative w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Fecha Inicio" />
+                </div>
+                <div>
+                    <input wire:model.live="fecha_fin" type="date"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Fecha Fin" />
+                </div>
+
+
+            </div>
+            <div class="flex justify-between gap-2 w-full md:w-2/5">
                 <div class="relative w-full ">
                     <div
                         class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">
@@ -25,160 +45,145 @@
                         placeholder="Buscar por número de pedido o proveedor">
                 </div>
                 <div class="flex items-center gap-2">
-                    
-                <div >
-                    @can('Crear Pedidos')
-                    <a href="{{ route('pedidos.crear') }}">
-                        <button type="button"
-                            class="w-full md:w-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Nuevo</button>
-                    </a>
-                    @endcan
+
+                    <div>
+                        @can('Crear Pedidos')
+                            <a href="{{ route('pedidos.crear') }}">
+                                <button type="button"
+                                    class="w-full md:w-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Nuevo</button>
+                            </a>
+                        @endcan
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class=" gap-4 w-full md:w-1/2 flex flex-wrap items-center">
-        <div >
-                        <input wire:model.live="fecha_inicio" type="date"
-                            class="relative w-8 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Fecha Inicio" />
-                    </div>
-                    <div>
-                        <input wire:model.live="fecha_fin" type="date"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Fecha Fin" />
-                    </div>
-                    <div>
-                        <button wire:click="resetFilters" type="button"
-                            class="w-full md:w-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                         </svg>
-                        </button>
-                    </div>
 
-    </div>
 
-    @if ($pedidos->isEmpty())
-        <x-empty />
-    @else
-        <div class="relative overflow-x-auto shadow-md rounded-lg">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            Código
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Proveedor
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Estado
-                        </th>
-                        <th scope="col" class="px-6 py-3 hidden md:table-cell">
-                            Fecha Solicitado
-                        </th>
-                        <th scope="col" class="px-6 py-3 hidden md:table-cell">
-                            Fecha Respuesta
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Entrega
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            <span class="sr-only">Edit</span>
-                            Acción
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($pedidos as $index => $item)
-                        <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <th scope="row"
-                                class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $item->numero_pedido }}
+        @if ($pedidos->isEmpty())
+            <x-empty />
+        @else
+            <div class="relative overflow-x-auto shadow-md rounded-lg">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Código
                             </th>
-                            <td scope="row" class="px-4 py-2 ">
-                                {{ $item->proveedor->nombre_proveedor }}
-                            </td>
-                            <td scope="row" class="px-4 py-2  whitespace-nowrap">
-                                @switch($item->estado_pedido)
-                                    @case('Aprobado')
-                                        <span
-                                            class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-green-900 dark:text-green-300">{{ $item->estado_pedido }}</span>
-                                    @break
-
-                                    @case('Cancelado')
-                                        <span
-                                            class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-red-900 dark:text-red-300">{{ $item->estado_pedido }}</span>
-                                    @break
-
-                                    @case('Pendiente')
-                                        <span
-                                            class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-gray-700 dark:text-gray-300">{{ $item->estado_pedido }}</span>
-                                    @break
-
-                                    @default
-                                @endswitch
-
-                            </td>
-                            <td scope="row" class="px-4 py-2 whitespace-nowrap">
-                                {{ $item->created_at }}
-                            </td>
-                            <td class="px-4 py-2 hidden md:table-cell">
-                                {{ $item->fecha_respuesta ?? 'Sin Respuesta' }}
-                            </td>
-                            <td class="px-4 py-2 hidden md:table-cell">
-                                @switch( $item->estado_entrega ?? 'Sin respuesta')
-                                    @case('Entregado')
-                                        <span
-                                            class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-green-900 dark:text-green-300"> {{ $item->estado_entrega }}</span>
-                                    @break
-
-                                    @case('Cancelada')
-                                        <span
-                                            class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-red-900 dark:text-red-300"> {{ $item->estado_entrega }}</span>
-                                    @break
-
-                                    @case('Pendiente')
-                                        <span
-                                            class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-gray-700 dark:text-gray-300"> {{ $item->estado_entrega }}</span>
-                                    @break
-
-                                    @case('Suspendida')
-                                        <span
-                                            class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-yellow-900 dark:text-yellow-300"> {{ $item->estado_entrega }}</span>
-                                    @break
-                                    @case('Sin respuesta')
-                                        <span
-                                            class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-yellow-900 dark:text-yellow-300">N/A</span>
-                                    @break
-
-                                    @default
-                                @endswitch
-
-
-                            </td>
-                            <td class="px-4 py-2 text-right">
-                                @can('Ver Pedidos')
-                                <a href="{{ route('pedidos.detalles', $item->id) }}">
-                                    <button type="button"
-                                        class="w-full md:w-auto text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 focus:outline-none dark:focus:ring-orange-800">Detalles</button>
-                                </a>
-                                @endcan
-                            </td>
+                            <th scope="col" class="px-6 py-3">
+                                Proveedor
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Estado
+                            </th>
+                            <th scope="col" class="px-6 py-3 hidden md:table-cell">
+                                Fecha Solicitado
+                            </th>
+                            <th scope="col" class="px-6 py-3 hidden md:table-cell">
+                                Fecha Respuesta
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Entrega
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                <span class="sr-only">Edit</span>
+                                Acción
+                            </th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            @if ($pedidos->hasPages())
-                <div class="mt-4">
-                    {{ $pedidos->links() }}
-                </div>
-            @endif
-        </div>
-    @endif
+                    </thead>
+                    <tbody>
+                        @foreach ($pedidos as $index => $item)
+                            <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <th scope="row"
+                                    class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ $item->numero_pedido }}
+                                </th>
+                                <td scope="row" class="px-4 py-2 ">
+                                    {{ $item->proveedor->nombre_proveedor }}
+                                </td>
+                                <td scope="row" class="px-4 py-2  whitespace-nowrap">
+                                    @switch($item->estado_pedido)
+                                        @case('Aprobado')
+                                            <span
+                                                class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-green-900 dark:text-green-300">{{ $item->estado_pedido }}</span>
+                                        @break
 
-    <div wire:loading>
-        <livewire:loader :mensaje="'Cargando...'" />
+                                        @case('Cancelado')
+                                            <span
+                                                class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-red-900 dark:text-red-300">{{ $item->estado_pedido }}</span>
+                                        @break
+
+                                        @case('Pendiente')
+                                            <span
+                                                class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-gray-700 dark:text-gray-300">{{ $item->estado_pedido }}</span>
+                                        @break
+
+                                        @default
+                                    @endswitch
+
+                                </td>
+                                <td scope="row" class="px-4 py-2 whitespace-nowrap">
+                                    {{ $item->created_at }}
+                                </td>
+                                <td class="px-4 py-2 hidden md:table-cell">
+                                    {{ $item->fecha_respuesta ?? 'Sin Respuesta' }}
+                                </td>
+                                <td class="px-4 py-2 hidden md:table-cell">
+                                    @switch($item->estado_entrega ?? 'Sin respuesta')
+                                        @case('Entregado')
+                                            <span
+                                                class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-green-900 dark:text-green-300">
+                                                {{ $item->estado_entrega }}</span>
+                                        @break
+
+                                        @case('Cancelada')
+                                            <span
+                                                class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-red-900 dark:text-red-300">
+                                                {{ $item->estado_entrega }}</span>
+                                        @break
+
+                                        @case('Pendiente')
+                                            <span
+                                                class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-gray-700 dark:text-gray-300">
+                                                {{ $item->estado_entrega }}</span>
+                                        @break
+
+                                        @case('Suspendida')
+                                            <span
+                                                class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-yellow-900 dark:text-yellow-300">
+                                                {{ $item->estado_entrega }}</span>
+                                        @break
+
+                                        @case('Sin respuesta')
+                                            <span
+                                                class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-yellow-900 dark:text-yellow-300">N/A</span>
+                                        @break
+
+                                        @default
+                                    @endswitch
+
+
+                                </td>
+                                <td class="px-4 py-2 text-right">
+                                    @can('Ver Pedidos')
+                                        <a href="{{ route('pedidos.detalles', $item->id) }}">
+                                            <button type="button"
+                                                class="w-full md:w-auto text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 focus:outline-none dark:focus:ring-orange-800">Detalles</button>
+                                        </a>
+                                    @endcan
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                @if ($pedidos->hasPages())
+                    <div class="mt-4">
+                        {{ $pedidos->links() }}
+                    </div>
+                @endif
+            </div>
+        @endif
+
+        <div wire:loading>
+            <livewire:loader :mensaje="'Cargando...'" />
+        </div>
     </div>
-</div>
