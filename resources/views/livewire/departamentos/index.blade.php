@@ -86,10 +86,16 @@
                                     <button type="button" wire:click.prevent="abrirEditar({{ $item->id }})"
                                         class="w-full md:w-auto text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 focus:outline-none dark:focus:ring-orange-800">Editar</button>
 
+                                    <button type="button" onclick="confirm('¿Estás seguro de eliminar este departamento?') || event.stopImmediatePropagation()"
+                                        wire:click.prevent="eliminar({{ $item->id }})"
+                                        class="w-full md:w-auto text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-900">Eliminar</button>
+
                             </td>
                         </tr>
                     @endforeach
+         
                 </tbody>
+                
             </table>
             @if ($departamento->hasPages())
                 <div class="mt-4">

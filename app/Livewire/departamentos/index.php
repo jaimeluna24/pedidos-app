@@ -96,4 +96,34 @@ class Index extends Component
             session()->flash('error', 'Ocurrió un error inesperado al actualizar el departamento.');
         }
     }
+
+    // public function eliminar()
+    // {
+    //     try {
+    //         $this->Departamento->delete();
+
+    //         redirect()->route('mantenimientos.departamentos.index');
+    //         session()->flash('success', 'Departamento eliminado exitosamente.');
+    //     } catch (ValidationException $e) {
+    //         session()->flash('error', 'Error de validación. Verifica los campos.');
+    //     } catch (\Exception $e) {
+    //         Log::error('Error al eliminar el Departamento: ' . $e->getMessage());
+    //         session()->flash('error', 'Ocurrió un error inesperado al editar el producto.');
+    //     }
+    // }
+    public function eliminar($id)
+    {
+        try {
+            $Departamento = Departamento::findOrFail($id);
+            $Departamento->delete();
+
+            session()->flash('success', 'Departamento eliminado exitosamente.');
+            return redirect()->route('mantenimientos.departamentos.index');
+        } catch (ValidationException $e) {
+            session()->flash('error', 'Error de validación. Verifica los campos.');
+        } catch (\Exception $e) {
+            Log::error('Error al eliminar el departamento: ' . $e->getMessage());
+            session()->flash('error', 'Ocurrió un error inesperado al eliminar.');
+        }
+    }
 }

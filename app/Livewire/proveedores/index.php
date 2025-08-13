@@ -154,4 +154,20 @@ class Index extends Component
         }
 
     }
+
+    public function eliminar($id)
+    {
+        try {
+            $proveedor = Proveedor::findOrFail($id);
+            $proveedor->delete();
+
+            session()->flash('success', 'Proveedor eliminado exitosamente.');
+            return redirect()->route('proveedor.index');
+        } catch (ValidationException $e) {
+            session()->flash('error', 'Error de validación. Verifica los campos.');
+        } catch (\Exception $e) {
+            Log::error('Error al eliminar el proveedor: ' . $e->getMessage());
+            session()->flash('error', 'Ocurrió un error inesperado al eliminar.');
+        }
+    }
 }
