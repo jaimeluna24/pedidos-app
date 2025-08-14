@@ -24,6 +24,7 @@ class Detalles extends Component
 
     public $query = '';
     public $productosPedidos = [];
+    public $totalDetalle = 0;
 
     public function mount($id)
     {
@@ -47,6 +48,8 @@ class Detalles extends Component
             ->get();
 
         $this->productosPedidos = $detalle_pedidos;
+        $this->totalDetalle = $detalle_pedidos->sum('subtotal');
+
         return view('livewire.pedidos.detalles');
     }
 

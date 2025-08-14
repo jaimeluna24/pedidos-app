@@ -133,13 +133,13 @@
             <div class="pl-4 mb-2">
                 <label for="countries" class="block text-sm font-medium text-gray-900 dark:text-white">Permisos</label>
             </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-3 p-4 bg-gray-700 rounded-md">
+            <div class="grid gap-6 mb-6 md:grid-cols-3 p-4 bg-gray-700 rounded-md ">
                 @foreach ($permisos as $item)
                     <div class="flex items-center">
                         <input id="default-checkbox-{{ $item->id }}" type="checkbox" value="{{ $item->name }}" wire:model="permisos_seleccionados"
                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="default-checkbox-{{ $item->id }}"
-                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-50">{{ $item->name }}</label>
+                            class="ms-2 text-sm font-medium text-white">{{ $item->name }}</label>
                     </div>
                 @endforeach
 

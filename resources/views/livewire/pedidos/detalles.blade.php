@@ -116,6 +116,7 @@
                             </th>
                         </tr>
                     </thead>
+
                     <tbody>
                         @foreach ($productosPedidos as $item)
                             <tr
@@ -141,8 +142,16 @@
                                     L. {{ $item->subtotal }}
                                 </td>
                             </tr>
+                            
                         @endforeach
+                        <tfoot>
+                        <tr>
+                            <td colspan="5" class="text-right font-bold px-6 py-2">Total:</td>
+                            <td class="font-bold px-6 py-2">L. {{ number_format($totalDetalle, 2) }}</td>
+                        </tr>
+                    </tfoot>
                     </tbody>
+                    
                 </table>
             </div>
         </div>
