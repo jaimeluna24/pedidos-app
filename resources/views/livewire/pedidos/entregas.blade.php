@@ -9,6 +9,26 @@
                     Lista de Entregas
                 </div>
             </div>
+            <div class="gap-2 w-full md:w-2/5 flex flex-wrap items-center justify-end pr-2">
+                  <div>
+                    <button wire:click="resetFilters" type="button"
+                        class="w-full md:w-auto text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 focus:outline-none dark:focus:ring-orange-800">
+                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#ffffff" d="M14.8 11.975L6.825 4H19q.625 0 .9.55t-.1 1.05zM19.775 22.6L14 16.825V19q0 .425-.288.713T13 20h-2q-.425 0-.712-.288T10 19v-6.175l-8.6-8.6L2.8 2.8l18.4 18.4z"/></svg>
+                    </button>
+                </div>
+                <div>
+                    <input wire:model.live="fecha_inicioentrega" type="date"
+                        class="relative w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Fecha Inicio" />
+                </div>
+                <div>
+                    <input wire:model.live="fecha_finentrega" type="date"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Fecha Fin" />
+                </div>
+
+
+            </div>
             <div class="flex justify-between gap-4 w-full md:w-1/2">
                 <div class="relative w-full">
                     <div

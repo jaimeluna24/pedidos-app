@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Spatie\Browsershot\Browsershot;
+use Illuminate\Support\Collection;
 
 class Detalles extends Component
 {
@@ -110,6 +111,12 @@ class Detalles extends Component
 
     public function generarPDF()
     {
+        $detalle_pedidos = DetallePedido::with('producto.unidad')
+        ->where('pedido_id', $this->pedido->id)
+        ->get();
+
+        $total_productos = $detalle_pedidos->sum('subtotal');
+
         $html = View::make('pdf.pedidos-pdf-plantilla', [
             'numero_pedido' => $this->pedido->numero_pedido,
             'fecha_pedido' => $this->pedido->created_at->format('Y/m/d'),
@@ -125,6 +132,8 @@ class Detalles extends Component
             'nombre_usuario' => $this->user->nombre_usuario,
             'departamento' => $this->user->departamento->nombre_departamento,
             'telefono_usuario' => $this->user->telefono,
+            'total_productos'   => $total_productos  
+            
         ])->render();
 
         $pdfContent = Browsershot::html($html)

@@ -22,16 +22,31 @@ class CrearEntregas extends Component
 
     public function buscarPedido()
     {
+        // $pedido = Pedido::where('numero_pedido', $this->numero_pedido)->first();
+        // $detalle_pedido = DetallePedido::where('pedido_id', $pedido->id)->with('producto')->get();
+        // if ($pedido) {
+        //     $this->pedido = $pedido;
+        //     $this->detalle_pedido = $detalle_pedido;
+        //     $this->estado_pedido = $pedido->estado_pedido;
+        //     session()->flash('success', 'Pedido encontrado exitosamente.');
+        // } else {
+        //     session()->flash('success', 'El pedido no se ha encontrado, verifique el número de pedido.');
+        // }
+        try {
         $pedido = Pedido::where('numero_pedido', $this->numero_pedido)->first();
-        $detalle_pedido = DetallePedido::where('pedido_id', $pedido->id)->with('producto')->get();
+
         if ($pedido) {
+            $detalle_pedido = DetallePedido::where('pedido_id', $pedido->id)->with('producto')->get();
             $this->pedido = $pedido;
             $this->detalle_pedido = $detalle_pedido;
             $this->estado_pedido = $pedido->estado_pedido;
             session()->flash('success', 'Pedido encontrado exitosamente.');
         } else {
-            session()->flash('success', 'El pedido no se ha encontrado, verifique el número de pedido.');
+            session()->flash('error', 'El pedido no se ha encontrado, verifique el número de pedido.');
         }
+        } catch (\Exception $e) {
+            session()->flash('error', 'Ocurrió un error al buscar el pedido.');
+    }
     }
 
     public function siguiente()

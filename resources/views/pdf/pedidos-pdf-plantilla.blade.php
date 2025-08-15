@@ -125,8 +125,29 @@
 </head>
 
 <body>
+    @php
+    $imagePath = public_path('storage/images/OIP.png');
+    $imageData = base64_encode(file_get_contents($imagePath));
+    $src = 'data:image/png;base64,' . $imageData;
+    @endphp
 
     <div class="contenido">
+        <div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <div style="margin-right: 15px;">
+        <img src="{{ $src }}" alt="Logo" style="height: 50px;">
+    </div>
+    <div>
+        <h2 style="margin: 0; font-size: 18px;">Detalles del Pedido</h2>
+        <p style="margin: 0; font-size: 12px; color: #555;">
+            Generado el {{ date('d/m/Y') }}
+        </p>
+    </div>
+</div>
+</div>
+
+        {{-- <img src="{{ public_path('storage\app\public\images\OIP.jpg') }}" 
+         alt="Logo" 
+         style="height: 50px; margin-right: 15px;"> --}}
         <div class="document-info" style="margin-bottom: 1cm">
             <h1>ORDEN DE PEDIDO</h1>
             <h1 style="margin-bottom: 1cm">{{ $numero_pedido }}</h1>
@@ -185,7 +206,20 @@
                     <td class="text-right">L. {{ $item->subtotal }}</td>
                 </tr>
                 @endforeach
+                
+                
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="6" class="text-right" style="font-weight: bold;">
+                        TOTAL
+                    </td>
+                    <td class="text-right" style="font-weight: bold;">
+                        L. {{ number_format($total_productos, 2) }}
+                    </td>
+                </tr>
+            </tfoot>
+            
             {{-- <tfoot>
                 <tr>
                     <td colspan="6" class="text-right"><strong>Total:</strong></td>

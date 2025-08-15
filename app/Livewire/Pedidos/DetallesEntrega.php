@@ -39,6 +39,7 @@ class DetallesEntrega extends Component
     public $detallePedido;
     public $detalleEntrega;
     public $pedidoExportar = [];
+    public $totalDetalleEntrega = 0;
 
     public function mount($id)
     {
@@ -81,6 +82,7 @@ class DetallesEntrega extends Component
 
 
         $this->productosPedidos = $detalle_entrega;
+        $this->totalDetalleEntrega = $detalle_entrega->sum('subtotal');
         return view('livewire.pedidos.detalles-entrega');
     }
 

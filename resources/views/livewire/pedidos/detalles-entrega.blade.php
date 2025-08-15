@@ -6,7 +6,7 @@
         <div class="flex flex-column sm:flex-row flex-wrap space-y-1 sm:space-y-0 items-center justify-between">
             <div class="items-center gap-8">
                 <div class="text-2xl font-semibold text-gray-900 dark:text-white">
-                    Detalles de Pedido
+                    Detalles de entregas
                 </div>
                 <div class="text-md font-semibold text-gray-900 dark:text-white">
                     Pedido: {{ $numero_pedido }} | Proveedor: {{ $nombre_proveedor }} | Tipo de Identificador:
@@ -108,6 +108,12 @@
                                 </td>
                             </tr>
                         @endforeach
+                        <tfoot>
+                        <tr>
+                            <td colspan="5" class="text-right font-bold px-6 py-2">Total:</td>
+                            <td class="font-bold px-6 py-2">L. {{ number_format($totalDetalleEntrega, 2) }}</td>
+                        </tr>
+                    </tfoot>
                     </tbody>
                 </table>
             </div>
