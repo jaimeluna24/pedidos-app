@@ -227,6 +227,12 @@
                 </tr>
             </tfoot> --}}
         </table>
+        <div style="margin-top: 120px; text-align: center;">
+            <div style="border-bottom: 1px solid #333; width: 300px; margin: 0 auto 8px auto; height: 2px;"></div>
+            <div style="font-size: 14px; font-weight: bold; color: #333;">
+                Firma y sello autorizado 
+            </div>
+        </div>
 
 
     </div>
